@@ -220,6 +220,7 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
     <div class="sb-nav">
       <button class="nav-item active" onclick="navTo('dashboard')" id="nav-dashboard"><span>🏠</span><span>Dashboard</span></button>
       <button class="nav-item" onclick="navTo('reminders')" id="nav-reminders"><span>🔔</span><span>Reminders</span><span class="bcnt hidden" id="nrc" style="background:rgba(251,191,36,.15);color:var(--yellow)">0</span></button>
+      <button class="nav-item" onclick="navTo('non-sewa')" id="nav-non-sewa"><span>📋</span><span>Non-Sewa</span><span class="bcnt hidden" id="nrc-ns" style="background:rgba(167,139,250,.15);color:var(--purple)">0</span></button>
       <div id="admin-nav" class="hidden">
         <button class="nav-item" onclick="navTo('projects-manage')" id="nav-projects-manage"><span>⚙️</span><span>Kelola Project</span></button>
       </div>
@@ -268,6 +269,22 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
         <div class="cat-filter" id="catf"></div>
         <div id="tlist"><div class="loading">⏳ Memuat data...</div></div>
       </div>
+      <!-- NON-SEWA -->
+      <div class="page" id="page-non-sewa">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div class="sec-title" style="margin-bottom:0;color:var(--purple)">📋 Reminder Non-Sewa</div>
+          <button class="btn-add" style="background:linear-gradient(135deg,var(--purple),#7c3aed)" onclick="openNSModal(null)">➕ Tambah</button>
+        </div>
+        <!-- Tab Non-Sewa -->
+        <div class="cat-filter" id="ns-tabs">
+          <button class="fpill active" onclick="setNSTab('laporan',this)">📊 Laporan/Report</button>
+          <button class="fpill" onclick="setNSTab('mcu',this)">🏥 Jadwal MCU</button>
+          <button class="fpill" onclick="setNSTab('siml',this)">📄 Izin Kerja (SIM L)</button>
+          <button class="fpill" onclick="setNSTab('sertifikasi',this)">🎓 Sertifikasi</button>
+          <button class="fpill" onclick="setNSTab('nonsewa_other',this)">📌 Lainnya</button>
+        </div>
+        <div id="ns-list"><div class="loading">⏳ Memuat data...</div></div>
+      </div>
       <!-- KELOLA PROJECT -->
       <div class="page" id="page-projects-manage">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -298,12 +315,33 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
       <label class="fl">Kategori Task ★</label>
       <div class="cat-grid" id="cat-selector"></div>
       <div id="custom-cat-field" class="hidden" style="margin-top:8px"><input class="fi" id="f-custom-cat" placeholder="Ketik nama kategori / jenis task lainnya..."/></div>
+      <!-- Sub-tipe Laporan -->
+      <div id="laporan-sub-wrap" class="hidden" style="margin-top:8px">
+        <label class="fl" style="color:var(--purple)">Jenis Laporan ★</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px" id="laporan-sub-grid">
+          ${LAPORAN_SUBTYPES ? '' : ''}
+        </div>
+      </div>
     </div>
     <div class="fg"><label class="fl">Nama Item / Deskripsi ★</label><input class="fi" id="f-item" placeholder="Contoh: IP Camera Outdoor 4MP Hikvision — 24 unit"/></div>
-    <div class="fsec"><div class="fsec-title" style="color:var(--yellow)">🏢 Vendor / Provider Penyedia ★</div><input class="fi" id="f-vendor" placeholder="Nama perusahaan vendor / provider penyedia"/></div>
-    <div class="fr2" style="margin-bottom:13px">
-      <div class="fg" style="margin-bottom:0"><label class="fl">Mulai Sewa ★</label><input class="fi" type="date" id="f-start"/></div>
-      <div class="fg" style="margin-bottom:0"><label class="fl">Berakhir Sewa ★</label><input class="fi" type="date" id="f-end"/></div>
+    <!-- SEWA FIELDS -->
+    <div id="sewa-fields-wrap">
+      <div class="fsec"><div class="fsec-title" style="color:var(--yellow)">🏢 Vendor / Provider Penyedia ★</div><input class="fi" id="f-vendor" placeholder="Nama perusahaan vendor / provider penyedia"/></div>
+      <div class="fr2" style="margin-bottom:13px">
+        <div class="fg" style="margin-bottom:0"><label class="fl">Mulai Sewa ★</label><input class="fi" type="date" id="f-start"/></div>
+        <div class="fg" style="margin-bottom:0"><label class="fl">Berakhir Sewa ★</label><input class="fi" type="date" id="f-end"/></div>
+      </div>
+    </div>
+    <!-- NON-SEWA FIELDS -->
+    <div id="ns-fields-wrap" class="hidden">
+      <div class="fsec">
+        <div class="fsec-title" style="color:var(--purple)">📋 Info Kegiatan Non-Sewa</div>
+        <div class="fg"><label class="fl">Nama PIC / Penanggung Jawab</label><input class="fi" id="f-pic" placeholder="Nama PIC atau departemen terkait"/></div>
+        <div class="fr2" style="margin-bottom:0">
+          <div class="fg" style="margin-bottom:0"><label class="fl">Tanggal Mulai ★</label><input class="fi" type="date" id="f-ns-start"/></div>
+          <div class="fg" style="margin-bottom:0"><label class="fl">Deadline / Berakhir ★</label><input class="fi" type="date" id="f-ns-end"/></div>
+        </div>
+      </div>
     </div>
     <div class="fsec">
       <div class="fsec-title" style="color:var(--purple)">🔔 Kontak Reminder</div>
@@ -399,6 +437,49 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
   </div>
 </div>
 
+<!-- MODAL NON-SEWA -->
+<div class="modal-overlay" id="modal-ns">
+  <div class="mbox">
+    <div class="mhdr"><div class="mtitle" id="ns-mtitle" style="color:var(--purple)">➕ Tambah Item Non-Sewa</div><button class="mclose" onclick="cm('ns')">✕</button></div>
+    <div id="ns-fp-field"><div class="fg"><label class="fl">Project ★</label><select class="fi" id="ns-f-pid"><option value="">— Pilih Project —</option></select></div></div>
+    <div class="fg">
+      <label class="fl">Jenis Kegiatan ★</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:4px" id="ns-cat-grid">
+        <button type="button" class="cat-opt" data-nscat="laporan" onclick="selNSCat(this,'laporan')"><span class="co-icon">📊</span><div class="co-body"><div class="co-name">Laporan / Report</div><div class="co-desc">SLA, TKDN, Invoice</div></div></button>
+        <button type="button" class="cat-opt" data-nscat="mcu" onclick="selNSCat(this,'mcu')"><span class="co-icon">🏥</span><div class="co-body"><div class="co-name">Jadwal MCU</div><div class="co-desc">Medical check-up SDM</div></div></button>
+        <button type="button" class="cat-opt" data-nscat="siml" onclick="selNSCat(this,'siml')"><span class="co-icon">📄</span><div class="co-body"><div class="co-name">Izin Kerja (SIM L)</div><div class="co-desc">SIM L, permit K3</div></div></button>
+        <button type="button" class="cat-opt" data-nscat="sertifikasi" onclick="selNSCat(this,'sertifikasi')"><span class="co-icon">🎓</span><div class="co-body"><div class="co-name">Lisensi Sertifikasi</div><div class="co-desc">Sertifikat kompetensi SDM</div></div></button>
+        <button type="button" class="cat-opt" style="grid-column:1/-1" data-nscat="nonsewa_other" onclick="selNSCat(this,'nonsewa_other')"><span class="co-icon">📌</span><div class="co-body"><div class="co-name">Lainnya</div><div class="co-desc">Kegiatan non-sewa lainnya</div></div></button>
+      </div>
+    </div>
+    <!-- Sub-tipe Laporan -->
+    <div id="ns-laporan-wrap" class="hidden">
+      <div class="fg"><label class="fl" style="color:var(--purple)">Jenis Laporan ★</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px" id="ns-laporan-grid">
+          <button type="button" class="meth-btn" data-sub="sla" onclick="selNSSub(this,'sla')">📈 SLA</button>
+          <button type="button" class="meth-btn" data-sub="tkdn" onclick="selNSSub(this,'tkdn')">🏭 TKDN</button>
+          <button type="button" class="meth-btn" data-sub="invoice" onclick="selNSSub(this,'invoice')">🧾 Invoice</button>
+          <button type="button" class="meth-btn" data-sub="other" onclick="selNSSub(this,'other')">📝 Lainnya</button>
+        </div>
+      </div>
+    </div>
+    <div class="fg"><label class="fl">Judul / Deskripsi ★</label><input class="fi" id="ns-f-title" placeholder="Contoh: Laporan SLA Bulan Maret 2025"/></div>
+    <div class="fg"><label class="fl">Nama PIC / Penanggung Jawab</label><input class="fi" id="ns-f-pic" placeholder="Nama orang / departemen yang bertanggung jawab"/></div>
+    <div class="fr2" style="margin-bottom:13px">
+      <div class="fg" style="margin-bottom:0"><label class="fl">Tanggal Mulai ★</label><input class="fi" type="date" id="ns-f-start"/></div>
+      <div class="fg" style="margin-bottom:0"><label class="fl">Deadline ★</label><input class="fi" type="date" id="ns-f-end"/></div>
+    </div>
+    <div class="fsec">
+      <div class="fsec-title" style="color:var(--purple)">🔔 Kontak Reminder</div>
+      <div class="fg"><label class="fl">No. WhatsApp</label><input class="fi" id="ns-f-wa" placeholder="+628xxxxxxxxxx"/></div>
+      <div class="fg"><label class="fl">Telegram @username / Chat ID</label><input class="fi" id="ns-f-tg" placeholder="@username atau -100xxxxxxx"/></div>
+      <div class="fg" style="margin-bottom:0"><label class="fl">Email</label><input class="fi" type="email" id="ns-f-email" placeholder="om@perusahaan.com"/></div>
+    </div>
+    <div class="fg"><label class="fl">Catatan</label><textarea class="fi" id="ns-f-notes" rows="2" placeholder="Keterangan tambahan..."></textarea></div>
+    <div class="mactions"><button class="bcx" onclick="cm('ns')">Batal</button><button class="bcg" onclick="saveNSItem()" style="background:linear-gradient(135deg,var(--purple),#7c3aed)">💾 Simpan</button></div>
+  </div>
+</div>
+
 <div id="tc"></div>
 
 <script>
@@ -429,16 +510,34 @@ const db   = firebase.database();
 // /tasks/{taskId}      → data task
 
 // ─── KATEGORI (FIXED) ──────────────────────────────────────────────
-const CATEGORIES = [
+// ─── KATEGORI SEWA ─────────────────────────────────────────────────
+const CATEGORIES_SEWA = [
   {id:"jasa",       name:"Sewa Jasa Layanan",            icon:"🔧", desc:"Managed service, maintenance, monitoring"},
   {id:"manpower",   name:"Sewa Man Power",               icon:"👷", desc:"Kontrak SDM per bulan / periode"},
   {id:"perangkat",  name:"Sewa Perangkat",               icon:"💻", desc:"Hardware, device, equipment"},
   {id:"isr",        name:"Sewa ISR",                     icon:"📻", desc:"Izin Siar Radio / frekuensi"},
   {id:"lisensi",    name:"Sewa Lisensi Perangkat",       icon:"🔑", desc:"Software license, subscription"},
-  {id:"mcu",        name:"Jadwal MCU Man Power",         icon:"🏥", desc:"Medical check-up berkala SDM"},
-  {id:"izin_kerja", name:"Lisensi Izin Kerja Man Power", icon:"📄", desc:"Sertifikasi, permit, izin K3"},
   {id:"kendaraan",  name:"Sewa Kendaraan Operasional",   icon:"🚗", desc:"Mobil, motor, alat berat operasional"},
   {id:"other",      name:"Lainnya / Custom",             icon:"📌", desc:"Task lain yang belum terdefinisi"},
+];
+
+// ─── KATEGORI NON-SEWA ──────────────────────────────────────────────
+const CATEGORIES_NON_SEWA = [
+  {id:"laporan",    name:"Laporan / Report",             icon:"📊", desc:"SLA, TKDN, Invoice, dll"},
+  {id:"mcu",        name:"Jadwal MCU",                   icon:"🏥", desc:"Medical check-up berkala SDM"},
+  {id:"siml",       name:"Lisensi Izin Kerja (SIM L)",   icon:"📄", desc:"SIM L, izin kerja, permit K3"},
+  {id:"sertifikasi",name:"Lisensi Sertifikasi",          icon:"🎓", desc:"Sertifikat kompetensi, keahlian SDM"},
+  {id:"nonsewa_other",name:"Lainnya",                    icon:"📌", desc:"Kegiatan non-sewa lainnya"},
+];
+
+const CATEGORIES = [...CATEGORIES_SEWA, ...CATEGORIES_NON_SEWA];
+
+// Sub-tipe untuk laporan/report
+const LAPORAN_SUBTYPES = [
+  {id:"sla",     name:"SLA",     icon:"📈"},
+  {id:"tkdn",    name:"TKDN",    icon:"🏭"},
+  {id:"invoice", name:"Invoice", icon:"🧾"},
+  {id:"other",   name:"Lainnya", icon:"📝"},
 ];
 
 const REMINDER_DAYS = 60;
@@ -453,11 +552,12 @@ const DEFAULT_PROJECTS = [
 ];
 
 // ─── STATE ─────────────────────────────────────────────────────────
-let UP=null, PROJECTS=[], TASKS=[];
+let UP=null, PROJECTS=[], TASKS=[], NON_SEWA_ITEMS=[];
 let curPage="dashboard", curProjId=null, curCat="all";
 let aeId=null, acTask=null, arTask=null, selMethod="whatsapp", selCatId=null;
 let selIconV="📷", selColorV="#38bdf8", editProjId=null;
-let offProjects=null, offTasks=null;
+let offProjects=null, offTasks=null, offNonSewa=null;
+let nsTab="laporan", nsEditId=null, nsSelSubtype=null;
 
 // ─── HELPERS ───────────────────────────────────────────────────────
 function du(v){if(!v)return 0;const t=new Date();t.setHours(0,0,0,0);const e=new Date(v);e.setHours(0,0,0,0);return Math.ceil((e-t)/864e5);}
@@ -465,7 +565,8 @@ function fd(v){if(!v)return"—";return new Date(v).toLocaleDateString("id-ID",{
 function ts(t){if(t.status==="closed")return"closed";const d=du(t.endDate);if(d<0)return"expired";if(d<=REMINDER_DAYS)return"expiring";return"active";}
 const SM={active:{label:"Aktif",color:"#2dd4bf"},expiring:{label:"Segera Berakhir",color:"#fbbf24"},expired:{label:"Kadaluarsa",color:"#f87171"},closed:{label:"Selesai",color:"#64748b"}};
 function gp(id){return PROJECTS.find(p=>p.id===id)||{id:"",name:"?",short:"?",color:"#64748b",icon:"❓"};}
-function gc(id){if(id==="other")return{name:"Lainnya / Custom",icon:"📌",desc:""};return CATEGORIES.find(c=>c.id===id)||{name:id,icon:"📌",desc:""};}
+function gc(id){if(id==="other"||id==="nonsewa_other")return{name:"Lainnya / Custom",icon:"📌",desc:""};return CATEGORIES.find(c=>c.id===id)||{name:id,icon:"📌",desc:""};}
+function isNonSewaCat(id){return CATEGORIES_NON_SEWA.some(c=>c.id===id);}
 function isAdmin(){return UP&&UP.role==="admin";}
 function canClose(t){return isAdmin()||(UP&&UP.role==="om"&&UP.projectId===t.projectId);}
 function myProjects(){return isAdmin()?PROJECTS:PROJECTS.filter(p=>p.id===UP?.projectId);}
@@ -492,9 +593,10 @@ auth.onAuthStateChanged(async user=>{
       }
     }catch(e){toast("❌ Gagal login: "+e.message,"#f87171");}
   }else{
-    UP=null;PROJECTS=[];TASKS=[];
+    UP=null;PROJECTS=[];TASKS=[];NON_SEWA_ITEMS=[];
     if(offProjects){offProjects();offProjects=null;}
     if(offTasks){offTasks();offTasks=null;}
+    if(offNonSewa){offNonSewa();offNonSewa=null;}
     $("app").classList.add("hidden");
     $("login-screen").classList.add("active");
   }
@@ -514,6 +616,7 @@ function showErr(m){$("lerr").textContent=m;$("lerr").classList.add("show");}
 async function doLogout(){
   if(offProjects){offProjects();offProjects=null;}
   if(offTasks){offTasks();offTasks=null;}
+  if(offNonSewa){offNonSewa();offNonSewa=null;}
   await auth.signOut();
 }
 $("ip").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin();});
@@ -542,9 +645,10 @@ function initApp(){
   $("sbn").textContent=UP.name||UP.email;
   $("sbr").textContent=isAdmin()?"👑 Administrator":"👤 Operational Manager";
   if(isAdmin())$("admin-nav").classList.remove("hidden");
-  buildProjNav();buildProjSel();buildCatSelector();
+  buildProjNav();buildProjSel();buildCatSelector();buildNSProjSel();
   subscribeProjects();
   subscribeTasks();
+  subscribeNonSewa();
 }
 
 // ─── REAL-TIME LISTENERS ───────────────────────────────────────────
@@ -575,6 +679,23 @@ function subscribeTasks(){
   offTasks=()=>ref.off("value",handler);
 }
 
+function subscribeNonSewa(){
+  if(offNonSewa)offNonSewa();
+  let ref=db.ref("non_sewa");
+  if(!isAdmin()) ref=ref.orderByChild("projectId").equalTo(UP.projectId);
+  const handler=snap=>{
+    if(snap.exists()){
+      NON_SEWA_ITEMS=Object.entries(snap.val()).map(([id,v])=>({id,...v}));
+      NON_SEWA_ITEMS.sort((a,b)=>new Date(a.endDate)-new Date(b.endDate));
+    }else NON_SEWA_ITEMS=[];
+    updateNSBadge();
+    if(curPage==="non-sewa")renderNonSewa();
+    if(curPage==="dashboard")renderDashboard();
+  };
+  ref.on("value",handler);
+  offNonSewa=()=>ref.off("value",handler);
+}
+
 // ─── NAV & SELECTORS ───────────────────────────────────────────────
 function buildProjNav(){
   const nl=$("pnl");nl.innerHTML="";
@@ -588,13 +709,29 @@ function buildProjSel(){
   const s=$("f-pid");s.innerHTML='<option value="">— Pilih Project —</option>';
   if(isAdmin())PROJECTS.forEach(p=>s.innerHTML+=`<option value="${p.id}">${p.icon} ${p.name}</option>`);
 }
+function buildNSProjSel(){
+  const s=$("ns-f-pid");if(!s)return;
+  s.innerHTML='<option value="">— Pilih Project —</option>';
+  if(isAdmin())PROJECTS.forEach(p=>s.innerHTML+=`<option value="${p.id}">${p.icon} ${p.name}</option>`);
+  else{const p=gp(UP?.projectId);s.innerHTML=`<option value="${p.id}" selected>${p.icon} ${p.name}</option>`;s.disabled=true;}
+}
 function buildCatSelector(){
   const g=$("cat-selector");g.innerHTML="";
-  CATEGORIES.forEach(c=>{
+  // Header Sewa
+  const hS=document.createElement("div");hS.style.cssText="grid-column:1/-1;font-size:9px;font-weight:700;letter-spacing:2px;color:var(--blue);font-family:var(--mono);padding:4px 2px 2px;text-transform:uppercase;border-bottom:1px solid var(--brd);margin-bottom:2px";hS.textContent="— KATEGORI SEWA —";g.appendChild(hS);
+  CATEGORIES_SEWA.forEach(c=>{
     const b=document.createElement("button");b.type="button";b.className="cat-opt";b.dataset.cat=c.id;
     if(selCatId===c.id)b.classList.add("selected");
     b.innerHTML=`<span class="co-icon">${c.icon}</span><div class="co-body"><div class="co-name">${c.name}</div><div class="co-desc">${c.desc}</div></div>`;
-    b.onclick=()=>selectCat(c.id);g.appendChild(b);
+    b.onclick=()=>selectCat(c.id,"sewa");g.appendChild(b);
+  });
+  // Header Non-Sewa
+  const hN=document.createElement("div");hN.style.cssText="grid-column:1/-1;font-size:9px;font-weight:700;letter-spacing:2px;color:var(--purple);font-family:var(--mono);padding:10px 2px 2px;text-transform:uppercase;border-bottom:1px solid var(--brd);margin-bottom:2px";hN.textContent="— NON SEWA —";g.appendChild(hN);
+  CATEGORIES_NON_SEWA.forEach(c=>{
+    const b=document.createElement("button");b.type="button";b.className="cat-opt";b.dataset.cat=c.id;
+    if(selCatId===c.id)b.classList.add("selected");
+    b.innerHTML=`<span class="co-icon">${c.icon}</span><div class="co-body"><div class="co-name">${c.name}</div><div class="co-desc">${c.desc}</div></div>`;
+    b.onclick=()=>selectCat(c.id,"nonsewa");g.appendChild(b);
   });
 }
 
@@ -605,11 +742,12 @@ function navTo(page){
   document.querySelectorAll(".nav-item").forEach(b=>b.classList.remove("active"));
   $("page-"+page).classList.add("active");$("nav-"+page)?.classList.add("active");
   $("btnadd").classList.add("hidden");
-  const titles={dashboard:"🏠 Dashboard",reminders:"🔔 Reminders","projects-manage":"⚙️ Kelola Project"};
+  const titles={dashboard:"🏠 Dashboard",reminders:"🔔 Reminders","projects-manage":"⚙️ Kelola Project","non-sewa":"📋 Reminder Non-Sewa"};
   $("tbt").textContent=titles[page]||page;
   if(page==="reminders")renderReminders();
   if(page==="projects-manage")renderProjectsManage();
   if(page==="dashboard")renderDashboard();
+  if(page==="non-sewa"){renderNonSewa();$("btnadd").classList.remove("hidden");}
 }
 function navToProject(id){
   curPage="project";curProjId=id;curCat="all";
@@ -630,6 +768,7 @@ function updateUI(){
   else if(curPage==="reminders")renderReminders();
   else if(curPage==="project")renderProjectPage();
   else if(curPage==="projects-manage")renderProjectsManage();
+  else if(curPage==="non-sewa")renderNonSewa();
 }
 function updateStats(){
   const mine=myTasks();const active=mine.filter(t=>t.status!=="closed");
@@ -637,6 +776,7 @@ function updateStats(){
   $("s-expiring").textContent=active.filter(t=>{const d=du(t.endDate);return d>=0&&d<=REMINDER_DAYS;}).length;
   $("s-expired").textContent=active.filter(t=>du(t.endDate)<0).length;
   $("s-closed").textContent=mine.filter(t=>t.status==="closed").length;
+  updateNSBadge();
 }
 function updateBadges(){
   PROJECTS.forEach(p=>{const el=$("nb-"+p.id);if(el)el.textContent=TASKS.filter(t=>t.projectId===p.id&&t.status!=="closed").length;});
@@ -648,7 +788,7 @@ function updateAlertPill(){
 }
 
 // ─── DASHBOARD ─────────────────────────────────────────────────────
-function renderDashboard(){renderProjOverview();renderAlertTable();renderN8NNote();}
+function renderDashboard(){renderProjOverview();renderAlertTable();renderNSAlertTable();renderN8NNote();}
 function renderProjOverview(){
   const grid=$("pog");grid.innerHTML="";
   myProjects().forEach(p=>{
@@ -680,6 +820,26 @@ function renderAlertTable(){
     const catIcon=gc(t.categoryId).icon;
     const tr=document.createElement("tr");
     tr.innerHTML=`<td><span style="color:${p.color};font-weight:600">${p.icon} ${p.short}</span></td><td style="color:var(--tx3);white-space:nowrap">${catIcon} ${catLabel}</td><td style="font-weight:500">${esc(t.itemName)}</td><td><span class="vcell">${esc(t.vendor)}</span></td><td style="color:var(--tx2);white-space:nowrap">${fd(t.endDate)}</td><td><span class="dmono" style="color:${color}">${Math.abs(days)}</span><span style="font-size:9px;color:var(--tx3);margin-left:3px">${days<0?"lewat":"hari"}</span></td><td><div style="display:flex;gap:5px"><button class="ab yellow" onclick="openRemind('${t.id}')">🔔 Reminder</button><button class="ab green" onclick="openClose('${t.id}')">✅ Close</button></div></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderNSAlertTable(){
+  const nsAlerts=getNSAlerts();
+  let sec=$("ns-alert-sec");
+  if(!sec){
+    // Create the section if it doesn't exist yet
+    sec=document.createElement("div");sec.id="ns-alert-sec";
+    const nc=$("n8n-container");nc.parentNode.insertBefore(sec,nc);
+  }
+  if(!nsAlerts.length){sec.innerHTML="";return;}
+  sec.innerHTML=`<div class="sec-title" style="color:var(--purple);margin-top:14px">📋 Non-Sewa — Perlu Tindakan Segera</div>
+  <div class="table-wrap"><table><thead><tr><th>Project</th><th>Jenis</th><th>Judul</th><th>PIC</th><th>Deadline</th><th>Sisa</th><th>Aksi</th></tr></thead><tbody id="ns-atbody"></tbody></table></div>`;
+  const tbody=sec.querySelector("#ns-atbody");
+  nsAlerts.forEach(i=>{
+    const p=gp(i.projectId);const days=du(i.endDate);const color=days<0?"#f87171":"#a78bfa";
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td><span style="color:${p.color};font-weight:600">${p.icon} ${p.short}</span></td><td style="color:var(--purple);white-space:nowrap">${getNSIcon(i.categoryId)} ${getNSLabel(i.categoryId,i.subtype)}</td><td style="font-weight:500">${esc(i.title)}</td><td style="color:var(--tx3)">${esc(i.pic||"—")}</td><td style="color:var(--tx2);white-space:nowrap">${fd(i.endDate)}</td><td><span class="dmono" style="color:${color}">${Math.abs(days)}</span><span style="font-size:9px;color:var(--tx3);margin-left:3px">${days<0?"lewat":"hari"}</span></td><td><div style="display:flex;gap:5px"><button class="ab" style="background:rgba(167,139,250,.1);color:var(--purple);border-color:rgba(167,139,250,.25)" onclick="openNSRemind('${i.id}')">🔔 Reminder</button><button class="ab green" onclick="markNSDone('${i.id}')">✅ Done</button></div></td>`;
     tbody.appendChild(tr);
   });
 }
@@ -756,11 +916,17 @@ function renderProjectsManage(){
 function cm(n){$("modal-"+n).classList.remove("open");}
 document.querySelectorAll(".modal-overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("open");}));
 
-function selectCat(id){
+function selectCat(id,group){
   selCatId=id;
   document.querySelectorAll(".cat-opt").forEach(b=>b.classList.remove("selected"));
   document.querySelector(`.cat-opt[data-cat="${id}"]`)?.classList.add("selected");
-  $("custom-cat-field").classList.toggle("hidden",id!=="other");
+  $("custom-cat-field").classList.toggle("hidden",id!=="other"&&id!=="nonsewa_other");
+  // Toggle field Vendor/Tanggal sesuai tipe
+  const isNS=group==="nonsewa"||isNonSewaCat(id);
+  $("ns-fields-wrap")&&($("ns-fields-wrap").classList.toggle("hidden",!isNS));
+  $("sewa-fields-wrap")&&($("sewa-fields-wrap").classList.toggle("hidden",isNS));
+  // Laporan subtype
+  $("laporan-sub-wrap")&&($("laporan-sub-wrap").classList.toggle("hidden",id!=="laporan"));
 }
 
 // ── TASK MODAL ──
@@ -771,12 +937,29 @@ function openTaskModal(taskId){
   buildCatSelector();
   if(isAdmin()){$("fp-field").classList.remove("hidden");$("fp-ro").classList.add("hidden");$("f-pid").value=task?.projectId||curProjId||"";}
   else{$("fp-field").classList.add("hidden");$("fp-ro").classList.remove("hidden");const p=gp(UP?.projectId);$("f-pro-lbl").textContent=`${p.icon} ${p.name}`;}
+  // Default: tampilkan sewa, sembunyikan ns
+  $("sewa-fields-wrap").classList.remove("hidden");
+  $("ns-fields-wrap").classList.add("hidden");
+  $("laporan-sub-wrap")&&$("laporan-sub-wrap").classList.add("hidden");
   if(task){
     selCatId=task.categoryId;
-    setTimeout(()=>{document.querySelector(`.cat-opt[data-cat="${task.categoryId}"]`)?.classList.add("selected");},50);
-    $("custom-cat-field").classList.toggle("hidden",task.categoryId!=="other");
-    if(task.categoryId==="other")$("f-custom-cat").value=task.customCat||"";
-  }else $("custom-cat-field").classList.add("hidden");
+    const isNS=isNonSewaCat(task.categoryId);
+    setTimeout(()=>{
+      document.querySelector(`.cat-opt[data-cat="${task.categoryId}"]`)?.classList.add("selected");
+      $("sewa-fields-wrap").classList.toggle("hidden",isNS);
+      $("ns-fields-wrap").classList.toggle("hidden",!isNS);
+    },50);
+    $("custom-cat-field").classList.toggle("hidden",task.categoryId!=="other"&&task.categoryId!=="nonsewa_other");
+    if(task.categoryId==="other"||task.categoryId==="nonsewa_other")$("f-custom-cat").value=task.customCat||"";
+    $("f-ns-start")&&($("f-ns-start").value=task.startDate||"");
+    $("f-ns-end")&&($("f-ns-end").value=task.endDate||"");
+    $("f-pic")&&($("f-pic").value=task.pic||"");
+  }else{
+    $("custom-cat-field").classList.add("hidden");
+    $("f-ns-start")&&($("f-ns-start").value="");
+    $("f-ns-end")&&($("f-ns-end").value="");
+    $("f-pic")&&($("f-pic").value="");
+  }
   $("f-item").value=task?.itemName||"";$("f-vendor").value=task?.vendor||"";
   $("f-start").value=task?.startDate||"";$("f-end").value=task?.endDate||"";
   $("f-wa").value=task?.contactWa||"";$("f-tg").value=task?.contactTg||"";
@@ -786,19 +969,25 @@ function openTaskModal(taskId){
 
 async function saveTask(){
   const projId=isAdmin()?$("f-pid").value:UP?.projectId;
-  const catId=selCatId;const customCat=catId==="other"?$("f-custom-cat").value.trim():"";
-  const name=$("f-item").value.trim();const vendor=$("f-vendor").value.trim();
-  const start=$("f-start").value;const end=$("f-end").value;
+  const catId=selCatId;const customCat=(catId==="other"||catId==="nonsewa_other")?$("f-custom-cat").value.trim():"";
+  const name=$("f-item").value.trim();
+  const isNS=isNonSewaCat(catId);
+  const vendor=isNS?"N/A":$("f-vendor").value.trim();
+  const start=isNS?($("f-ns-start")?.value||$("f-start").value):$("f-start").value;
+  const end=isNS?($("f-ns-end")?.value||$("f-end").value):$("f-end").value;
   if(!projId){toast("❌ Pilih project!","#f87171");return;}
   if(!catId){toast("❌ Pilih kategori task!","#f87171");return;}
-  if(catId==="other"&&!customCat){toast("❌ Isi nama kategori custom!","#f87171");return;}
-  if(!name||!vendor||!start||!end){toast("❌ Field bertanda ★ wajib diisi!","#f87171");return;}
+  if((catId==="other"||catId==="nonsewa_other")&&!customCat){toast("❌ Isi nama kategori custom!","#f87171");return;}
+  if(!name){toast("❌ Nama item wajib diisi!","#f87171");return;}
+  if(!isNS&&!vendor){toast("❌ Nama vendor wajib diisi!","#f87171");return;}
+  if(!start||!end){toast("❌ Tanggal wajib diisi!","#f87171");return;}
   if(new Date(end)<new Date(start)){toast("❌ Tanggal berakhir harus setelah mulai!","#f87171");return;}
   const data={
     projectId:projId,categoryId:catId,customCat:customCat||"",
     itemName:name,vendor,notes:$("f-notes").value.trim(),
     startDate:start,endDate:end,
     contactWa:$("f-wa").value.trim(),contactTg:$("f-tg").value.trim(),contactEmail:$("f-email").value.trim(),
+    pic:$("f-pic")?.value.trim()||"",
     needsReminder:du(end)<=REMINDER_DAYS,
     updatedAt:now(),updatedBy:UP.uid,
   };
@@ -869,6 +1058,241 @@ async function confirmRemind(){
     });
     cm("remind");toast("🔔 Reminder berhasil dicatat.","#fbbf24");
   }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+}
+
+// ─── NON-SEWA BADGE ────────────────────────────────────────────────
+function updateNSBadge(){
+  const items=(isAdmin()?NON_SEWA_ITEMS:NON_SEWA_ITEMS.filter(i=>i.projectId===UP?.projectId)).filter(i=>i.status!=="done");
+  const expiring=items.filter(i=>{const d=du(i.endDate);return d>=0&&d<=REMINDER_DAYS;});
+  const expired=items.filter(i=>du(i.endDate)<0);
+  const total=expiring.length+expired.length;
+  const nb=$("nrc-ns");
+  if(nb){if(total>0){nb.textContent=total;nb.classList.remove("hidden");}else nb.classList.add("hidden");}
+}
+
+// ─── NON-SEWA RENDER ───────────────────────────────────────────────
+function setNSTab(tab,btn){
+  nsTab=tab;
+  document.querySelectorAll("#ns-tabs .fpill").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  renderNonSewa();
+}
+
+function getNSLabel(cat,sub){
+  const cats={laporan:"Laporan/Report",mcu:"Jadwal MCU",siml:"Izin Kerja (SIM L)",sertifikasi:"Sertifikasi",nonsewa_other:"Lainnya"};
+  const subs={sla:"SLA",tkdn:"TKDN",invoice:"Invoice",other:"Lainnya"};
+  let label=cats[cat]||cat;
+  if(cat==="laporan"&&sub)label+=` — ${subs[sub]||sub}`;
+  return label;
+}
+function getNSIcon(cat){
+  const icons={laporan:"📊",mcu:"🏥",siml:"📄",sertifikasi:"🎓",nonsewa_other:"📌"};
+  return icons[cat]||"📌";
+}
+
+function renderNonSewa(){
+  const list=$("ns-list");
+  const myItems=isAdmin()?NON_SEWA_ITEMS:NON_SEWA_ITEMS.filter(i=>i.projectId===UP?.projectId);
+  const filtered=myItems.filter(i=>i.categoryId===nsTab);
+  if(!filtered.length){
+    list.innerHTML=`<div class="empty"><div class="ei">${getNSIcon(nsTab)}</div>Belum ada data di kategori ini.<br><span style="font-size:11px;color:var(--tx3)">Klik tombol ➕ Tambah untuk menambahkan.</span></div>`;
+    return;
+  }
+  list.innerHTML="";
+  filtered.forEach(item=>{
+    const days=du(item.endDate);
+    const isDone=item.status==="done";
+    let statusColor=isDone?"#64748b":days<0?"#f87171":days<=REMINDER_DAYS?"#fbbf24":"#2dd4bf";
+    let statusLabel=isDone?"Selesai":days<0?"Lewat Deadline":days<=REMINDER_DAYS?"Segera Deadline":"Aktif";
+    const proj=gp(item.projectId);
+    const catLabel=getNSLabel(item.categoryId,item.subtype);
+    const catIcon=getNSIcon(item.categoryId);
+    const remCount=item.reminders?Object.keys(item.reminders).length:0;
+    const lastRem=remCount?Object.values(item.reminders).sort((a,b)=>new Date(b.sentAt)-new Date(a.sentAt))[0]:null;
+
+    const card=document.createElement("div");card.className="task-card";
+    card.style.borderLeft=`3px solid ${statusColor}`;
+    let badges=`<span class="badge" style="background:${statusColor}18;color:${statusColor};border-color:${statusColor}33">${statusLabel}</span>`;
+    badges+=`<span class="badge" style="background:${proj.color}18;color:${proj.color};border-color:${proj.color}33">${proj.icon} ${proj.short}</span>`;
+    badges+=`<span class="badge" style="background:rgba(167,139,250,.1);color:var(--purple);border-color:rgba(167,139,250,.25)">${catIcon} ${catLabel}</span>`;
+
+    let dbox=!isDone?`<div class="days-box" style="background:${statusColor}18;border:1px solid ${statusColor}33"><div class="dn" style="color:${statusColor}">${Math.abs(days)}</div><div class="dl">${days<0?"HARI LEWAT":"HARI LAGI"}</div></div>`:`<span class="badge" style="background:rgba(100,116,139,.1);color:#64748b;border-color:rgba(100,116,139,.2);white-space:nowrap">✅ Done</span>`;
+
+    let contacts="";
+    if(item.contactWa||item.contactTg||item.contactEmail){contacts=`<div class="cchips">${item.contactWa?`<span class="ccip">📱 ${esc(item.contactWa)}</span>`:""}${item.contactTg?`<span class="ccip">✈️ ${esc(item.contactTg)}</span>`:""}${item.contactEmail?`<span class="ccip">📧 ${esc(item.contactEmail)}</span>`:""}</div>`;}
+
+    let remlog=remCount?`<div style="margin-top:5px;font-size:10px;color:var(--purple)">🔔 ${remCount}x reminder · terakhir via ${lastRem.method} (${fd(lastRem.sentAt)})</div>`:"";
+    let extra=item.pic?`<div style="margin-top:3px;font-size:10px;color:var(--tx3)">👤 PIC: <strong style="color:var(--tx2)">${esc(item.pic)}</strong></div>`:"";
+    if(item.notes)extra+=`<div style="font-size:11px;color:var(--tx3);font-style:italic;margin-top:3px">💬 ${esc(item.notes)}</div>`;
+
+    let acts="";
+    if(!isDone){
+      if(days<=REMINDER_DAYS)acts+=`<button class="ab yellow" onclick="openNSRemind('${item.id}')">🔔 Catat Reminder</button>`;
+      acts+=`<button class="ab green" onclick="markNSDone('${item.id}')">✅ Tandai Done</button>`;
+      if(isAdmin()||UP?.projectId===item.projectId)acts+=`<button class="ab blue" onclick="openNSModal('${item.id}')">✏️ Edit</button>`;
+    }
+    if(isAdmin())acts+=`<button class="ab red" onclick="delNSItem('${item.id}')">🗑️ Hapus</button>`;
+
+    card.innerHTML=`<div class="tcrow"><div style="flex:1;min-width:0"><div class="tbadges">${badges}</div><div class="ttitle">${esc(item.title)}</div><div class="tdate">📅 ${fd(item.startDate)} → ${fd(item.endDate)}</div>${contacts}${remlog}${extra}</div><div style="display:flex;align-items:flex-start;padding-top:2px">${dbox}</div></div>${acts?`<div class="tactions">${acts}</div>`:""}`;
+    list.appendChild(card);
+  });
+}
+
+// ─── NON-SEWA MODAL ────────────────────────────────────────────────
+let nsArItem=null;
+function selNSCat(btn,cat){
+  nsSelSubtype=null;
+  document.querySelectorAll("#ns-cat-grid .cat-opt").forEach(b=>b.classList.remove("selected"));
+  btn.classList.add("selected");
+  $("ns-laporan-wrap").classList.toggle("hidden",cat!=="laporan");
+  document.querySelectorAll("#ns-laporan-grid .meth-btn").forEach(b=>b.classList.remove("active"));
+}
+function selNSSub(btn,sub){
+  nsSelSubtype=sub;
+  document.querySelectorAll("#ns-laporan-grid .meth-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+}
+function getNSSeletedCat(){
+  const sel=document.querySelector("#ns-cat-grid .cat-opt.selected");
+  return sel?sel.dataset.nscat:null;
+}
+
+function openNSModal(itemId){
+  nsEditId=itemId;nsSelSubtype=null;
+  const item=itemId?NON_SEWA_ITEMS.find(i=>i.id===itemId):null;
+  $("ns-mtitle").textContent=item?"✏️ Edit Item Non-Sewa":"➕ Tambah Item Non-Sewa";
+  buildNSProjSel();
+  if(item){
+    $("ns-f-pid").value=item.projectId||"";
+    // Select kategori
+    document.querySelectorAll("#ns-cat-grid .cat-opt").forEach(b=>b.classList.remove("selected"));
+    const catBtn=document.querySelector(`#ns-cat-grid .cat-opt[data-nscat="${item.categoryId}"]`);
+    if(catBtn){catBtn.classList.add("selected");}
+    $("ns-laporan-wrap").classList.toggle("hidden",item.categoryId!=="laporan");
+    if(item.subtype){
+      nsSelSubtype=item.subtype;
+      const subBtn=document.querySelector(`#ns-laporan-grid .meth-btn[data-sub="${item.subtype}"]`);
+      if(subBtn)subBtn.classList.add("active");
+    }
+    $("ns-f-title").value=item.title||"";
+    $("ns-f-pic").value=item.pic||"";
+    $("ns-f-start").value=item.startDate||"";
+    $("ns-f-end").value=item.endDate||"";
+    $("ns-f-wa").value=item.contactWa||"";
+    $("ns-f-tg").value=item.contactTg||"";
+    $("ns-f-email").value=item.contactEmail||"";
+    $("ns-f-notes").value=item.notes||"";
+  }else{
+    document.querySelectorAll("#ns-cat-grid .cat-opt").forEach(b=>b.classList.remove("selected"));
+    document.querySelectorAll("#ns-laporan-grid .meth-btn").forEach(b=>b.classList.remove("active"));
+    $("ns-laporan-wrap").classList.add("hidden");
+    ["ns-f-title","ns-f-pic","ns-f-wa","ns-f-tg","ns-f-email","ns-f-notes"].forEach(id=>{const el=$(id);if(el)el.value="";});
+    $("ns-f-start").value="";$("ns-f-end").value="";
+    if(!isAdmin()){$("ns-f-pid").value=UP?.projectId||"";}
+  }
+  $("modal-ns").classList.add("open");
+}
+
+async function saveNSItem(){
+  const projId=$("ns-f-pid").value;
+  const catId=getNSSeletedCat();
+  const title=$("ns-f-title").value.trim();
+  const start=$("ns-f-start").value;
+  const end=$("ns-f-end").value;
+  if(!projId){toast("❌ Pilih project!","#f87171");return;}
+  if(!catId){toast("❌ Pilih jenis kegiatan!","#f87171");return;}
+  if(catId==="laporan"&&!nsSelSubtype){toast("❌ Pilih jenis laporan!","#f87171");return;}
+  if(!title||!start||!end){toast("❌ Judul, tanggal mulai & deadline wajib diisi!","#f87171");return;}
+  if(new Date(end)<new Date(start)){toast("❌ Deadline harus setelah tanggal mulai!","#f87171");return;}
+  const data={
+    projectId:projId,categoryId:catId,
+    subtype:catId==="laporan"?(nsSelSubtype||""):"",
+    title,pic:$("ns-f-pic").value.trim(),
+    startDate:start,endDate:end,
+    contactWa:$("ns-f-wa").value.trim(),contactTg:$("ns-f-tg").value.trim(),contactEmail:$("ns-f-email").value.trim(),
+    notes:$("ns-f-notes").value.trim(),
+    needsReminder:du(end)<=REMINDER_DAYS,
+    updatedAt:now(),updatedBy:UP.uid,
+  };
+  try{
+    if(nsEditId){
+      await db.ref("non_sewa/"+nsEditId).update(data);
+      toast("✅ Item diperbarui!","#2dd4bf");
+    }else{
+      const newKey=db.ref("non_sewa").push().key;
+      data.status="active";data.createdAt=now();data.createdBy=UP.uid;
+      await db.ref("non_sewa/"+newKey).set(data);
+      toast("✅ Item Non-Sewa ditambahkan!","#2dd4bf");
+    }
+    cm("ns");nsEditId=null;nsSelSubtype=null;
+  }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+}
+
+async function markNSDone(id){
+  if(!confirm("Tandai item ini sebagai Done?"))return;
+  try{
+    await db.ref("non_sewa/"+id).update({status:"done",doneAt:now(),doneBy:UP.uid,needsReminder:false});
+    toast("✅ Item ditandai Done!","#2dd4bf");
+  }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+}
+
+async function delNSItem(id){
+  if(!confirm("Yakin hapus item ini?"))return;
+  try{await db.ref("non_sewa/"+id).remove();toast("🗑️ Item dihapus.","#64748b");}
+  catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+}
+
+// ─── NON-SEWA REMINDER ─────────────────────────────────────────────
+function openNSRemind(id){
+  nsArItem=NON_SEWA_ITEMS.find(i=>i.id===id);if(!nsArItem)return;
+  const days=du(nsArItem.endDate);
+  $("rsum").innerHTML=`<strong style="color:var(--purple);font-size:13px">${esc(nsArItem.title)}</strong><br><span style="font-size:11px;color:var(--tx2)">${getNSLabel(nsArItem.categoryId,nsArItem.subtype)} · Deadline: ${fd(nsArItem.endDate)} <strong style="color:${days<0?"var(--red)":"var(--yellow)"}">(${days<0?Math.abs(days)+" hari lewat":days+" hari lagi"})</strong></span>${nsArItem.contactWa?`<br><span style="font-size:10px;color:var(--tx3)">📱 ${esc(nsArItem.contactWa)}</span>`:""}${nsArItem.contactTg?`<span style="font-size:10px;color:var(--tx3)"> · ✈️ ${esc(nsArItem.contactTg)}</span>`:""}${nsArItem.contactEmail?`<br><span style="font-size:10px;color:var(--tx3)">📧 ${esc(nsArItem.contactEmail)}</span>`:""}`;
+  selMethod="whatsapp";document.querySelectorAll(".meth-btn").forEach(b=>b.classList.remove("active"));
+  // Hanya reset meth-btn di modal remind, bukan ns-laporan-grid
+  document.querySelectorAll("#modal-remind .meth-btn")[0]?.classList.add("active");
+  arTask=null; // clear arTask so confirmRemind knows this is NS
+  $("modal-remind").classList.add("open");
+  // Override confirmRemind for NS item
+  $("modal-remind").dataset.nsmode="1";$("modal-remind").dataset.nsid=id;
+}
+
+// Override confirmRemind to handle NS items
+const _origConfirmRemind=confirmRemind;
+async function confirmRemind(){
+  const modal=$("modal-remind");
+  if(modal.dataset.nsmode==="1"){
+    const nsId=modal.dataset.nsid;
+    const nsItem=NON_SEWA_ITEMS.find(i=>i.id===nsId);
+    if(!nsItem)return;
+    const days=du(nsItem.endDate);
+    const remKey=db.ref("non_sewa/"+nsId+"/reminders").push().key;
+    try{
+      await db.ref("non_sewa/"+nsId).update({
+        [`reminders/${remKey}`]:{method:selMethod,sentAt:now(),sentBy:UP.uid,daysLeft:days},
+        lastReminderAt:now(),lastReminderMethod:selMethod,needsReminder:true,updatedAt:now(),
+      });
+      cm("remind");modal.dataset.nsmode="";modal.dataset.nsid="";
+      toast("🔔 Reminder Non-Sewa berhasil dicatat.","#a78bfa");
+    }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+    return;
+  }
+  // Normal task remind
+  if(!arTask)return;
+  const days=du(arTask.endDate);
+  const remKey=db.ref("tasks/"+arTask.id+"/reminders").push().key;
+  try{
+    await db.ref("tasks/"+arTask.id).update({
+      [`reminders/${remKey}`]:{method:selMethod,sentAt:now(),sentBy:UP.uid,daysLeft:days},
+      lastReminderAt:now(),lastReminderMethod:selMethod,needsReminder:true,updatedAt:now(),
+    });
+    cm("remind");toast("🔔 Reminder berhasil dicatat.","#fbbf24");
+  }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+}
+
+// ─── NON-SEWA DASHBOARD SUMMARY ────────────────────────────────────
+function getNSAlerts(){
+  const items=isAdmin()?NON_SEWA_ITEMS:NON_SEWA_ITEMS.filter(i=>i.projectId===UP?.projectId);
+  return items.filter(i=>i.status!=="done"&&i.endDate&&du(i.endDate)<=REMINDER_DAYS).sort((a,b)=>new Date(a.endDate)-new Date(b.endDate));
 }
 
 // ── DELETE TASK ──
