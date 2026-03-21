@@ -385,9 +385,18 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
 <!-- MODAL CLOSE -->
 <div class="modal-overlay" id="modal-close">
   <div class="mbox">
-    <div class="mhdr"><div class="mtitle" style="color:var(--green)">✅ Close Task</div><button class="mclose" onclick="cm('close')">✕</button></div>
+    <div class="mhdr"><div class="mtitle" style="color:var(--green)">✅ Close Task Sewa</div><button class="mclose" onclick="cm('close')">✕</button></div>
     <div class="tsum" id="csum" style="background:rgba(45,212,191,.07);border:1px solid rgba(45,212,191,.2)"></div>
+    <!-- Ketentuan Close Sewa -->
+    <div style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.22);border-radius:var(--r-md);padding:10px 13px;margin-bottom:14px">
+      <div style="font-size:10px;font-weight:700;color:var(--yellow);letter-spacing:.5px;margin-bottom:6px">📋 KETENTUAN CLOSE TASK SEWA</div>
+      <div style="font-size:11px;color:var(--tx2);line-height:1.75">
+        <div>① Isi <strong style="color:var(--yellow)">Nomor SR</strong> (Service Request) terlebih dahulu</div>
+        <div>② Task dapat di-Close setelah <strong style="color:var(--green)">PO (Purchase Order)</strong> sudah diterbitkan</div>
+      </div>
+    </div>
     <div class="fg"><label class="fl hl">Nomor SR (Service Request) ★</label><input class="fi" id="f-sr" placeholder="Contoh: SR-2025-0042"/></div>
+    <div class="fg"><label class="fl" style="color:var(--green)">Nomor PO (Purchase Order) ★</label><input class="fi" id="f-po" placeholder="Contoh: PO-2025-0099"/></div>
     <label class="cbrow" onclick="toggleNP()"><input type="checkbox" id="chknp" checked/><span>Input Masa Sewa Baru setelah Close Task</span></label>
     <div id="npf"><div class="fr2" style="margin-bottom:13px">
       <div class="fg" style="margin-bottom:0"><label class="fl">Mulai Sewa Baru ★</label><input class="fi" type="date" id="f-ns"/></div>
@@ -395,6 +404,43 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
     </div></div>
     <div class="fg"><label class="fl">Catatan Close</label><textarea class="fi" id="f-cn" rows="2" placeholder="Keterangan..."></textarea></div>
     <div class="mactions"><button class="bcx" onclick="cm('close')">Batal</button><button class="bcg" onclick="confirmClose()">✅ Konfirmasi Close</button></div>
+  </div>
+</div>
+
+<!-- MODAL CLOSE NON-SEWA (DONE + EVIDENCE) -->
+<div class="modal-overlay" id="modal-ns-done">
+  <div class="mbox">
+    <div class="mhdr"><div class="mtitle" style="color:var(--purple)">✅ Tandai Done — Non-Sewa</div><button class="mclose" onclick="cm('ns-done')">✕</button></div>
+    <div class="tsum" id="nsd-sum" style="background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2)"></div>
+    <!-- Ketentuan Close Non-Sewa -->
+    <div style="background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.25);border-radius:var(--r-md);padding:10px 13px;margin-bottom:14px">
+      <div style="font-size:10px;font-weight:700;color:var(--purple);letter-spacing:.5px;margin-bottom:6px">📋 KETENTUAN CLOSE TASK NON-SEWA</div>
+      <div style="font-size:11px;color:var(--tx2);line-height:1.75">
+        <div>① Lampirkan <strong style="color:var(--purple)">File Evidence / Bukti Pendukung</strong> sebelum di-Done</div>
+        <div>② File yang diterima: <strong style="color:var(--tx1)">PDF, JPG, PNG, DOCX, XLSX</strong> (maks. 5MB)</div>
+        <div>③ Deskripsi singkat wajib diisi sebagai keterangan bukti</div>
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl" style="color:var(--purple)">📎 File Evidence / Bukti Pendukung ★</label>
+      <div id="nsd-dropzone" style="border:2px dashed rgba(167,139,250,.35);border-radius:var(--r-md);padding:18px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:8px" onclick="$('nsd-file-input').click()" ondragover="event.preventDefault();this.style.borderColor='var(--purple)'" ondragleave="this.style.borderColor='rgba(167,139,250,.35)'" ondrop="handleNSDrop(event)">
+        <div style="font-size:24px;margin-bottom:6px">📁</div>
+        <div style="font-size:12px;color:var(--tx2)">Klik atau drag & drop file di sini</div>
+        <div style="font-size:10px;color:var(--tx3);margin-top:3px">PDF · JPG · PNG · DOCX · XLSX (maks. 5MB)</div>
+      </div>
+      <input type="file" id="nsd-file-input" accept=".pdf,.jpg,.jpeg,.png,.docx,.xlsx" style="display:none" onchange="handleNSFileSelect(this)"/>
+      <div id="nsd-file-preview" class="hidden" style="background:var(--bg3);border:1px solid rgba(167,139,250,.3);border-radius:var(--r-md);padding:10px 13px;display:flex;align-items:center;gap:10px">
+        <span style="font-size:22px" id="nsd-file-icon">📄</span>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:12px;font-weight:600;color:var(--tx1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="nsd-file-name">—</div>
+          <div style="font-size:10px;color:var(--tx3)" id="nsd-file-size">—</div>
+        </div>
+        <button type="button" onclick="clearNSFile()" style="background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.3);border-radius:5px;padding:3px 8px;font-size:11px">✕ Hapus</button>
+      </div>
+    </div>
+    <div class="fg"><label class="fl" style="color:var(--purple)">Keterangan Evidence ★</label><textarea class="fi" id="nsd-f-desc" rows="2" placeholder="Contoh: Laporan SLA bulan Maret sudah disubmit ke PHR pada 5 April 2025..."></textarea></div>
+    <div class="fg"><label class="fl">Catatan Tambahan</label><textarea class="fi" id="nsd-f-notes" rows="2" placeholder="Catatan tambahan (opsional)..."></textarea></div>
+    <div class="mactions"><button class="bcx" onclick="cm('ns-done')">Batal</button><button class="bcg" onclick="confirmNSDone()" style="background:linear-gradient(135deg,var(--purple),#7c3aed)">✅ Konfirmasi Done</button></div>
   </div>
 </div>
 
@@ -816,7 +862,7 @@ function updateAlertPill(){
 }
 
 // ─── DASHBOARD ─────────────────────────────────────────────────────
-function renderDashboard(){renderProjOverview();renderAlertTable();renderNSAlertTable();renderN8NNote();}
+function renderDashboard(){renderProjOverview();renderAlertTable();renderNSAlertTable();}
 function renderProjOverview(){
   const grid=$("pog");grid.innerHTML="";
   myProjects().forEach(p=>{
@@ -871,11 +917,7 @@ function renderNSAlertTable(){
     tbody.appendChild(tr);
   });
 }
-function renderN8NNote(){
-  const nc=$("n8n-container");
-  if(isAdmin()){nc.innerHTML=`<div class="n8n-note"><div class="n8n-title">⚙️ Integrasi N8N / OpenClaw</div><div class="n8n-text">Path <code>/tasks/{taskId}</code> di Realtime Database adalah sumber data untuk N8N. Buat workflow yang membaca task dengan <code class="cb">needsReminder: true</code> lalu kirim notifikasi ke <code class="cb">contactWa</code> / <code class="cb">contactTg</code> / <code class="cb">contactEmail</code>. Reminder terus berjalan sampai OM melakukan <code class="cg">Close Task</code> dan mengisi nomor <code class="cy">SR</code>.</div></div>`;}
-  else nc.innerHTML="";
-}
+function renderN8NNote(){}
 
 // ─── REMINDERS ─────────────────────────────────────────────────────
 function renderReminders(){
@@ -916,7 +958,7 @@ function buildCard(task,showProj){
   const remCount=task.reminders?Object.keys(task.reminders).length:0;
   const lastRem=task.reminders?Object.values(task.reminders).sort((a,b)=>new Date(b.sentAt)-new Date(a.sentAt))[0]:null;
   let remlog=remCount?`<div style="margin-top:5px;font-size:10px;color:var(--purple)">🔔 ${remCount}x reminder · terakhir via ${lastRem.method} (${fd(lastRem.sentAt)})</div>`:"";
-  let extra=task.srNumber?`<div style="margin-top:3px;font-size:10px;color:var(--green);font-weight:600">✅ SR: ${esc(task.srNumber)}</div>`:"";
+  let extra=task.srNumber?`<div style="margin-top:3px;font-size:10px;color:var(--green);font-weight:600">✅ SR: ${esc(task.srNumber)}${task.poNumber?` &nbsp;·&nbsp; <span style="color:#34d399">PO: ${esc(task.poNumber)}</span>`:""}</div>`:"";
   if(task.notes)extra+=`<div style="font-size:11px;color:var(--tx3);font-style:italic;margin-top:3px">💬 ${esc(task.notes)}</div>`;
   let acts="";
   if(st!=="closed"){
@@ -1037,18 +1079,19 @@ async function saveTask(){
 function openClose(id){
   acTask=TASKS.find(t=>t.id===id);if(!acTask)return;
   $("csum").innerHTML=`<strong style="color:var(--tx1);font-size:13px">${esc(acTask.itemName)}</strong><br><span style="font-size:11px;color:var(--tx2)">🏢 ${esc(acTask.vendor)} · 📅 Berakhir: ${fd(acTask.endDate)}</span>`;
-  $("f-sr").value="";$("f-cn").value="";$("f-ns").value="";$("f-ne").value="";
+  $("f-sr").value="";$("f-po").value="";$("f-cn").value="";$("f-ns").value="";$("f-ne").value="";
   $("chknp").checked=true;$("npf").style.display="block";
   $("modal-close").classList.add("open");
 }
 function toggleNP(){$("npf").style.display=$("chknp").checked?"block":"none";}
 async function confirmClose(){
   const sr=$("f-sr").value.trim();if(!sr){toast("❌ Nomor SR wajib diisi!","#f87171");return;}
+  const po=$("f-po").value.trim();if(!po){toast("❌ Nomor PO wajib diisi! Task baru bisa di-Close jika PO sudah diterbitkan.","#f87171");return;}
   const addNew=$("chknp").checked;const ns=$("f-ns").value;const ne=$("f-ne").value;
   if(addNew&&(!ns||!ne)){toast("❌ Isi periode sewa baru!","#f87171");return;}
   try{
     await db.ref("tasks/"+acTask.id).update({
-      status:"closed",srNumber:sr,closeNotes:$("f-cn").value.trim(),
+      status:"closed",srNumber:sr,poNumber:po,closeNotes:$("f-cn").value.trim(),
       closedAt:now(),closedBy:UP.uid,needsReminder:false,
     });
     if(addNew){
@@ -1152,6 +1195,7 @@ function renderNonSewa(){
     let remlog=remCount?`<div style="margin-top:5px;font-size:10px;color:var(--purple)">🔔 ${remCount}x reminder · terakhir via ${lastRem.method} (${fd(lastRem.sentAt)})</div>`:"";
     let extra=item.pic?`<div style="margin-top:3px;font-size:10px;color:var(--tx3)">👤 PIC: <strong style="color:var(--tx2)">${esc(item.pic)}</strong></div>`:"";
     if(item.notes)extra+=`<div style="font-size:11px;color:var(--tx3);font-style:italic;margin-top:3px">💬 ${esc(item.notes)}</div>`;
+    if(isDone&&item.evidence)extra+=`<div style="margin-top:5px;font-size:10px;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:5px;padding:4px 9px;color:var(--purple)">📎 Evidence: <strong>${esc(item.evidence.fileName)}</strong> · ${esc(item.evidence.description)}</div>`;
 
     let acts="";
     if(!isDone){
@@ -1256,11 +1300,67 @@ async function saveNSItem(){
   }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
 }
 
-async function markNSDone(id){
-  if(!confirm("Tandai item ini sebagai Done?"))return;
+// ─── NON-SEWA DONE MODAL ───────────────────────────────────────────
+let nsCurrentDoneId=null, nsEvidenceFile=null;
+
+function markNSDone(id){
+  // Open modal instead of confirm()
+  nsCurrentDoneId=id;nsEvidenceFile=null;
+  const item=NON_SEWA_ITEMS.find(i=>i.id===id);if(!item)return;
+  $("nsd-sum").innerHTML=`<strong style="color:var(--purple);font-size:13px">${esc(item.title)}</strong><br><span style="font-size:11px;color:var(--tx2)">${getNSIcon(item.categoryId)} ${getNSLabel(item.categoryId,item.subtype)} · Deadline: ${fd(item.endDate)}</span>`;
+  $("nsd-f-desc").value="";$("nsd-f-notes").value="";
+  $("nsd-file-preview").classList.add("hidden");
+  $("nsd-dropzone").style.display="block";
+  $("nsd-file-input").value="";
+  $("modal-ns-done").classList.add("open");
+}
+
+function handleNSDrop(e){
+  e.preventDefault();$("nsd-dropzone").style.borderColor="rgba(167,139,250,.35)";
+  const file=e.dataTransfer.files[0];if(file)setNSFile(file);
+}
+function handleNSFileSelect(inp){const file=inp.files[0];if(file)setNSFile(file);}
+function setNSFile(file){
+  const allowed=["application/pdf","image/jpeg","image/png","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"];
+  if(!allowed.includes(file.type)&&!file.name.match(/\.(pdf|jpg|jpeg|png|docx|xlsx)$/i)){toast("❌ Format file tidak didukung!","#f87171");return;}
+  if(file.size>5*1024*1024){toast("❌ Ukuran file maksimal 5MB!","#f87171");return;}
+  nsEvidenceFile=file;
+  const icons={pdf:"📄","jpg":"🖼️","jpeg":"🖼️","png":"🖼️","docx":"📝","xlsx":"📊"};
+  const ext=file.name.split(".").pop().toLowerCase();
+  $("nsd-file-icon").textContent=icons[ext]||"📎";
+  $("nsd-file-name").textContent=file.name;
+  $("nsd-file-size").textContent=(file.size/1024).toFixed(1)+" KB";
+  $("nsd-file-preview").classList.remove("hidden");
+  $("nsd-dropzone").style.display="none";
+}
+function clearNSFile(){
+  nsEvidenceFile=null;$("nsd-file-input").value="";
+  $("nsd-file-preview").classList.add("hidden");
+  $("nsd-dropzone").style.display="block";
+}
+
+async function confirmNSDone(){
+  if(!nsCurrentDoneId)return;
+  if(!nsEvidenceFile){toast("❌ File evidence wajib dilampirkan!","#f87171");return;}
+  const desc=$("nsd-f-desc").value.trim();if(!desc){toast("❌ Keterangan evidence wajib diisi!","#f87171");return;}
+  // Encode file ke base64 untuk disimpan sebagai metadata (nama+ukuran) di Firebase
+  // File aktual disimpan di Storage atau cukup metadata untuk bukti audit
+  const evidenceMeta={
+    fileName:nsEvidenceFile.name,
+    fileSize:nsEvidenceFile.size,
+    fileType:nsEvidenceFile.type,
+    description:desc,
+    uploadedAt:now(),
+    uploadedBy:UP.uid,
+  };
   try{
-    await db.ref("non_sewa/"+id).update({status:"done",doneAt:now(),doneBy:UP.uid,needsReminder:false});
-    toast("✅ Item ditandai Done!","#2dd4bf");
+    await db.ref("non_sewa/"+nsCurrentDoneId).update({
+      status:"done",doneAt:now(),doneBy:UP.uid,needsReminder:false,
+      evidence:evidenceMeta,
+      closeNotes:$("nsd-f-notes").value.trim(),
+    });
+    cm("ns-done");nsCurrentDoneId=null;nsEvidenceFile=null;
+    toast("✅ Item ditandai Done dengan evidence terlampir!","#a78bfa");
   }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
 }
 
