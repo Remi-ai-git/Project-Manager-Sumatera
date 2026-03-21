@@ -206,6 +206,11 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
     <div class="fg"><label class="fl">Password</label><input class="fi" type="password" id="ip" placeholder="••••••••" autocomplete="current-password"/></div>
     <button class="btnlogin" id="btnlogin" onclick="doLogin()">MASUK →</button>
     <p style="text-align:center;margin-top:16px;font-size:11px;color:var(--tx3)">Hubungi Administrator untuk akun login Anda</p>
+    <div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--brd);text-align:center">
+      <div style="font-size:9px;color:var(--tx3);letter-spacing:.5px">Developed by</div>
+      <div style="font-family:var(--syne);font-size:13px;font-weight:800;color:var(--blue);letter-spacing:1px;margin-top:2px">PAN</div>
+      <div style="font-size:10px;color:var(--tx3)">Customer Operation / LA</div>
+    </div>
   </div>
 </div>
 
@@ -227,7 +232,14 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
       <div class="sb-section">PROJECTS</div>
       <div id="pnl"></div>
     </div>
-    <div class="sb-footer"><button class="btn-logout" onclick="doLogout()">🚪 Keluar</button></div>
+    <div class="sb-footer">
+      <button class="btn-logout" onclick="doLogout()">🚪 Keluar</button>
+      <div style="margin-top:8px;padding:8px 4px 0;border-top:1px solid var(--brd);text-align:center">
+        <div style="font-size:9px;color:var(--tx3);line-height:1.6">Developed by</div>
+        <div style="font-family:var(--syne);font-size:10px;font-weight:700;color:var(--blue);letter-spacing:.5px">PAN</div>
+        <div style="font-size:9px;color:var(--tx3)">Customer Operation / LA</div>
+      </div>
+    </div>
   </aside>
 
   <div id="main">
@@ -290,6 +302,22 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
           <div class="sec-title" style="margin-bottom:0">⚙️ Kelola Project</div>
           <button class="bcb" onclick="openProjectModal(null)" style="font-size:12px;padding:7px 14px">➕ Tambah Project Baru</button>
+        </div>
+        <!-- Daftar Project Aktif -->
+        <div style="background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r-lg);padding:13px 15px;margin-bottom:14px">
+          <div style="font-size:9px;font-weight:700;letter-spacing:2px;color:var(--tx3);font-family:var(--mono);margin-bottom:10px;text-transform:uppercase">📋 Daftar Project Terdaftar</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px">
+            <div style="background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r-md);padding:8px 11px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">📷</span><div><div style="font-size:11px;font-weight:700;color:#38bdf8">Pertamina EP - CCTV Zona4</div><div style="font-size:9px;color:var(--tx3)">ID: cctv4</div></div></div>
+            <div style="background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r-md);padding:8px 11px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">💡</span><div><div style="font-size:11px;font-weight:700;color:#fbbf24">Pertamina EP - FTTH Reg. 1</div><div style="font-size:9px;color:var(--tx3)">ID: ftth1</div></div></div>
+            <div style="background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r-md);padding:8px 11px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">🌐</span><div><div style="font-size:11px;font-weight:700;color:#fb923c">Pertamina EP - WAN Ext Zona 1</div><div style="font-size:9px;color:var(--tx3)">ID: wan1</div></div></div>
+            <div style="background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r-md);padding:8px 11px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">🔌</span><div><div style="font-size:11px;font-weight:700;color:#2dd4bf">Pertamina EP - LAN Ext Zona 4</div><div style="font-size:9px;color:var(--tx3)">ID: lan4</div></div></div>
+            <div style="background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r-md);padding:8px 11px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">📡</span><div><div style="font-size:11px;font-weight:700;color:#c084fc">PHR - Satkom</div><div style="font-size:9px;color:var(--tx3)">ID: satkom</div></div></div>
+            <div style="background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r-md);padding:8px 11px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">🛡️</span><div><div style="font-size:11px;font-weight:700;color:#f87171">PHR - HSSE Frame CCTV</div><div style="font-size:9px;color:var(--tx3)">ID: hsse</div></div></div>
+          </div>
+          <div style="background:rgba(56,189,248,.06);border:1px dashed rgba(56,189,248,.25);border-radius:var(--r-md);padding:8px 11px;display:flex;align-items:center;gap:8px;cursor:pointer" onclick="openProjectModal(null)">
+            <span style="font-size:16px;opacity:.5">➕</span>
+            <div><div style="font-size:11px;font-weight:700;color:var(--blue)">Opsi Lainnya — Tambah Project Baru</div><div style="font-size:9px;color:var(--tx3)">Klik untuk menambahkan project baru di masa depan</div></div>
+          </div>
         </div>
         <div id="pm-list" class="pm-list"></div>
         <div style="background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r-lg);padding:14px 16px">
@@ -390,9 +418,9 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
 <div class="modal-overlay" id="modal-project">
   <div class="mbox sm">
     <div class="mhdr"><div class="mtitle" id="pm-title" style="color:var(--blue)">➕ Tambah Project Baru</div><button class="mclose" onclick="cm('project')">✕</button></div>
-    <div class="fg"><label class="fl">ID Project ★ <span style="font-size:9px;color:var(--tx3);text-transform:none;letter-spacing:0">(huruf kecil, tanpa spasi)</span></label><input class="fi" id="pf-id" placeholder="wan2 / satkom2 / ftth2 ..."/></div>
-    <div class="fg"><label class="fl">Nama Lengkap Project ★</label><input class="fi" id="pf-name" placeholder="Contoh: WAN Extension Zona 2"/></div>
-    <div class="fg"><label class="fl">Nama Pendek ★ <span style="font-size:9px;color:var(--tx3);text-transform:none;letter-spacing:0">(untuk sidebar)</span></label><input class="fi" id="pf-short" placeholder="WAN Zona 2" maxlength="20"/></div>
+    <div class="fg"><label class="fl">ID Project ★ <span style="font-size:9px;color:var(--tx3);text-transform:none;letter-spacing:0">(huruf kecil, tanpa spasi)</span></label><input class="fi" id="pf-id" placeholder="pep_wan2 / phr_cctv2 / dst..."/></div>
+    <div class="fg"><label class="fl">Nama Lengkap Project ★</label><input class="fi" id="pf-name" placeholder="Contoh: Pertamina EP - WAN Ext Zona 2"/></div>
+    <div class="fg"><label class="fl">Nama Pendek ★ <span style="font-size:9px;color:var(--tx3);text-transform:none;letter-spacing:0">(untuk sidebar)</span></label><input class="fi" id="pf-short" placeholder="PEP WAN Z2" maxlength="20"/></div>
     <div class="fg"><label class="fl">Ikon Project ★</label>
       <div class="icon-grid" id="icon-picker">
         <div class="icon-opt selected" onclick="selIconP(this,'📷')">📷</div>
@@ -543,12 +571,12 @@ const LAPORAN_SUBTYPES = [
 const REMINDER_DAYS = 60;
 
 const DEFAULT_PROJECTS = [
-  {id:"cctv4", name:"Managed Layanan CCTV Zona 4",   short:"CCTV Zona 4",   color:"#38bdf8", icon:"📷"},
-  {id:"lan4",  name:"LAN Extension Zona 4",           short:"LAN Zona 4",    color:"#2dd4bf", icon:"🔌"},
-  {id:"wan1",  name:"WAN Extension Zona 1",           short:"WAN Zona 1",    color:"#fb923c", icon:"🌐"},
-  {id:"ftth1", name:"FTTH Internet Perumahan Reg. 1", short:"FTTH Reg. 1",   color:"#fbbf24", icon:"💡"},
-  {id:"satkom",name:"SATKOM Zona Rokan",              short:"SATKOM Rokan",  color:"#c084fc", icon:"📡"},
-  {id:"hsse",  name:"HSSE Frame Zona Rokan",          short:"HSSE Rokan",    color:"#f87171", icon:"🛡️"},
+  {id:"cctv4", name:"Pertamina EP - CCTV Zona4",      short:"PEP CCTV Z4",   color:"#38bdf8", icon:"📷"},
+  {id:"ftth1", name:"Pertamina EP - FTTH Reg. 1",     short:"PEP FTTH R1",   color:"#fbbf24", icon:"💡"},
+  {id:"wan1",  name:"Pertamina EP - WAN Ext Zona 1",  short:"PEP WAN Z1",    color:"#fb923c", icon:"🌐"},
+  {id:"lan4",  name:"Pertamina EP - LAN Ext Zona 4",  short:"PEP LAN Z4",    color:"#2dd4bf", icon:"🔌"},
+  {id:"satkom",name:"PHR - Satkom",                   short:"PHR Satkom",    color:"#c084fc", icon:"📡"},
+  {id:"hsse",  name:"PHR - HSSE Frame CCTV",          short:"PHR HSSE",      color:"#f87171", icon:"🛡️"},
 ];
 
 // ─── STATE ─────────────────────────────────────────────────────────
