@@ -16,7 +16,7 @@
 :root{
   --bg:#070b17;--bg2:#0c1525;--bg3:#060e1c;--bg4:#0a1220;
   --brd:#182038;--brd2:#1e2d4a;
-  --tx1:#e4eaf5;--tx2:#8896b0;--tx3:#3d5070;
+  --tx1:#f0f5ff;--tx2:#a8b8d0;--tx3:#5a7090;
   --blue:#38bdf8;--blue-d:#0ea5e9;
   --green:#2dd4bf;--green-d:#0d9488;
   --yellow:#fbbf24;--yellow-d:#d97706;
@@ -25,12 +25,12 @@
   --font:'DM Sans',system-ui,sans-serif;
   --mono:'JetBrains Mono',monospace;
   --syne:'Syne',system-ui,sans-serif;
-  --r-sm:6px;--r-md:10px;--r-lg:14px;--r-xl:18px;--sw:242px;
+  --r-sm:6px;--r-md:10px;--r-lg:14px;--r-xl:18px;--sw:256px;
 }
-html,body{height:100%;background:var(--bg);color:var(--tx1);font-family:var(--font);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+html,body{height:100%;background:var(--bg);color:var(--tx1);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 button{font-family:var(--font);cursor:pointer;transition:all .18s}
 button:hover{opacity:.83}
-input,select,textarea{font-family:var(--font);font-size:13px}
+input,select,textarea{font-family:var(--font);font-size:14px}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg3)}::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:2px}
 select option{background:var(--bg2);color:var(--tx1)}
 input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.5);opacity:.6}
@@ -41,35 +41,35 @@ input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.5);opacity:.6
 #main{margin-left:var(--sw);flex:1;display:flex;flex-direction:column;min-height:100vh;transition:margin .25s}
 #main.full{margin-left:0}
 .sb-brand{padding:18px 14px 14px;border-bottom:1px solid var(--brd)}
-.sb-brand-name{font-family:var(--syne);font-weight:800;font-size:11px;color:var(--blue);letter-spacing:1.8px}
+.sb-brand-name{font-family:var(--syne);font-weight:800;font-size:12px;color:var(--blue);letter-spacing:1.8px}
 .sb-brand-sub{font-size:9px;color:var(--tx3);margin-top:3px}
 .sb-user{padding:10px 14px;border-bottom:1px solid var(--brd);background:rgba(255,255,255,.02)}
-.sb-user-name{font-size:13px;font-weight:600;color:var(--tx1)}
+.sb-user-name{font-size:14px;font-weight:600;color:var(--tx1)}
 .sb-user-role{font-size:10px;color:var(--tx3);margin-top:2px}
 .sb-nav{padding:8px 7px;flex:1}
 .sb-section{padding:9px 10px 4px;font-size:9px;color:var(--tx3);letter-spacing:2px;font-family:var(--mono)}
-.nav-item{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:7px 10px;border-radius:var(--r-md);border:1px solid transparent;color:var(--tx3);background:transparent;font-size:12px;margin-bottom:2px}
+.nav-item{display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:9px 12px;border-radius:var(--r-md);border:1px solid transparent;color:var(--tx2);background:transparent;font-size:13px;font-weight:500;margin-bottom:3px}
 .nav-item:hover{background:rgba(255,255,255,.04);color:var(--tx2)}
 .nav-item.active{background:rgba(56,189,248,.1);border-color:rgba(56,189,248,.3);color:var(--blue)}
 .nav-item .bcnt{margin-left:auto;font-family:var(--mono);font-size:9px;border-radius:4px;padding:1px 6px}
 .sb-footer{padding:10px 12px;border-top:1px solid var(--brd)}
 .btn-logout{width:100%;background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.25);border-radius:var(--r-md);padding:7px;font-size:12px}
-#topbar{height:52px;background:var(--bg3);border-bottom:1px solid var(--brd);padding:0 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+#topbar{height:56px;background:var(--bg3);border-bottom:1px solid var(--brd);padding:0 22px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
 .tb-left{display:flex;align-items:center;gap:10px}
 .btn-menu{background:none;border:none;color:var(--tx3);font-size:19px;padding:4px;line-height:1}
-.tb-title{font-family:var(--mono);font-size:11px;color:var(--blue)}
+.tb-title{font-family:var(--mono);font-size:13px;color:var(--blue);font-weight:600}
 .tb-right{display:flex;align-items:center;gap:8px}
-.pill-alert{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);border-radius:var(--r-md);padding:4px 11px;font-size:11px;color:var(--yellow);cursor:pointer}
+.pill-alert{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);border-radius:var(--r-md);padding:5px 13px;font-size:12px;color:var(--yellow);cursor:pointer}
 .btn-add{background:linear-gradient(135deg,var(--blue),var(--blue-d));color:var(--bg);border:none;border-radius:var(--r-md);padding:6px 14px;font-size:12px;font-weight:700;font-family:var(--syne)}
 #content{flex:1;padding:22px 26px;overflow-y:auto}
 .page{display:none}.page.active{display:block}
-.sec-title{font-size:9px;font-weight:700;letter-spacing:2.5px;color:var(--tx3);font-family:var(--mono);margin-bottom:11px;text-transform:uppercase}
+.sec-title{font-size:10px;font-weight:700;letter-spacing:2.5px;color:var(--tx2);font-family:var(--mono);margin-bottom:13px;text-transform:uppercase}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
 .stat-card{background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r-lg);padding:15px 12px;text-align:center;cursor:pointer;transition:all .15s}
 .stat-card:hover{background:var(--bg4)}
-.stat-card .si{font-size:20px;margin-bottom:5px}
-.stat-card .sv{font-family:var(--mono);font-size:27px;font-weight:600;line-height:1;margin-bottom:4px}
-.stat-card .sl{font-size:10px;color:var(--tx3)}
+.stat-card .si{font-size:24px;margin-bottom:6px}
+.stat-card .sv{font-family:var(--mono);font-size:32px;font-weight:600;line-height:1;margin-bottom:4px}
+.stat-card .sl{font-size:12px;color:var(--tx2)}
 .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:22px}
 .proj-card{background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r-lg);padding:15px;cursor:pointer;transition:all .15s;position:relative}
 .proj-card:hover{background:var(--bg4)}
@@ -88,21 +88,21 @@ input[type=date]::-webkit-calendar-picker-indicator{filter:invert(.5);opacity:.6
 .chip-red{background:rgba(248,113,113,.1);color:var(--red);border-color:rgba(248,113,113,.25)}
 .table-wrap{background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r-lg);overflow:hidden;margin-bottom:20px;overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:600px}
-th{background:var(--bg3);padding:8px 11px;text-align:left;font-size:9px;font-weight:600;letter-spacing:1.5px;color:var(--tx3);white-space:nowrap;text-transform:uppercase;font-family:var(--mono)}
-td{padding:9px 11px;border-top:1px solid var(--brd);font-size:12px;vertical-align:middle}
+th{background:var(--bg3);padding:9px 13px;text-align:left;font-size:10px;font-weight:600;letter-spacing:1.5px;color:var(--tx2);white-space:nowrap;text-transform:uppercase;font-family:var(--mono)}
+td{padding:10px 13px;border-top:1px solid var(--brd);font-size:13px;vertical-align:middle}
 tr:hover td{background:rgba(255,255,255,.02)}
-.vcell{background:rgba(251,191,36,.08);color:var(--yellow);border:1px solid rgba(251,191,36,.2);border-radius:5px;padding:2px 7px;font-size:11px;font-weight:600;white-space:nowrap}
+.vcell{background:rgba(251,191,36,.08);color:var(--yellow);border:1px solid rgba(251,191,36,.2);border-radius:5px;padding:3px 9px;font-size:12px;font-weight:600;white-space:nowrap}
 .dmono{font-family:var(--mono);font-size:13px;font-weight:600}
 .task-card{background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r-lg);padding:14px 16px;margin-bottom:9px;transition:all .15s}
 .task-card:hover{border-color:var(--brd2)}
 .tcrow{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .tbadges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:7px}
-.badge{border-radius:5px;padding:2px 8px;font-size:10px;font-weight:600;border:1px solid}
-.ttitle{font-family:var(--syne);font-weight:700;font-size:13px;color:var(--tx1);margin-bottom:5px}
+.badge{border-radius:5px;padding:3px 9px;font-size:11px;font-weight:600;border:1px solid}
+.ttitle{font-family:var(--syne);font-weight:700;font-size:15px;color:var(--tx1);margin-bottom:5px}
 .vtag{display:inline-flex;align-items:center;gap:5px;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.18);border-radius:5px;padding:3px 9px;margin-bottom:5px}
-.tdate{font-size:11px;color:var(--tx3);margin-bottom:3px}
+.tdate{font-size:12px;color:var(--tx2);margin-bottom:3px}
 .cchips{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
-.ccip{background:rgba(255,255,255,.04);border:1px solid var(--brd);border-radius:4px;padding:2px 7px;font-size:10px;color:var(--tx3)}
+.ccip{background:rgba(255,255,255,.04);border:1px solid var(--brd);border-radius:4px;padding:2px 8px;font-size:11px;color:var(--tx2)}
 .days-box{text-align:center;min-width:66px;padding:8px 10px;border-radius:var(--r-md);flex-shrink:0}
 .days-box .dn{font-family:var(--mono);font-size:22px;font-weight:600;line-height:1}
 .days-box .dl{font-size:9px;color:var(--tx3);margin-top:2px;letter-spacing:.8px}
@@ -131,9 +131,9 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
 .mtitle{font-family:var(--syne);font-weight:700;font-size:15px}
 .mclose{background:none;border:none;color:var(--tx3);font-size:21px;line-height:1;padding:2px}
 .fg{margin-bottom:13px}
-.fl{display:block;font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--tx3);margin-bottom:5px}
+.fl{display:block;font-size:11px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--tx2);margin-bottom:6px}
 .fl.hl{color:var(--yellow)}
-.fi{width:100%;background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r-md);padding:8px 12px;color:var(--tx1);font-size:13px;outline:none;transition:border-color .15s}
+.fi{width:100%;background:var(--bg3);border:1px solid var(--brd2);border-radius:var(--r-md);padding:9px 13px;color:var(--tx1);font-size:14px;outline:none;transition:border-color .15s}
 .fi:focus{border-color:var(--blue)}
 .fr2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .fsec{background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r-md);padding:13px;margin-bottom:13px}
@@ -187,7 +187,14 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
 .empty{text-align:center;padding:50px;color:var(--tx3)}
 .empty .ei{font-size:46px;margin-bottom:11px}
 #tc{position:fixed;top:14px;right:14px;z-index:9999;display:flex;flex-direction:column;gap:7px;pointer-events:none}
-.toast{background:var(--bg2);border:1px solid var(--brd2);border-left:3px solid;border-radius:var(--r-md);padding:9px 14px;font-size:12px;color:var(--tx1);min-width:240px;max-width:320px;box-shadow:0 8px 24px rgba(0,0,0,.4);animation:tIn .2s ease;pointer-events:all}
+.toast{background:var(--bg2);border:1px solid var(--brd2);border-left:3px solid;border-radius:var(--r-md);padding:9px 14px;font-size:13px;color:var(--tx1);min-width:240px;max-width:320px;box-shadow:0 8px 24px rgba(0,0,0,.4);animation:tIn .2s ease;pointer-events:all}
+.sb-section{padding:10px 12px 4px;font-size:9px;color:var(--tx3);letter-spacing:2px;font-family:var(--mono);text-transform:uppercase}
+.log-row{background:var(--bg2);border:1px solid var(--brd);border-radius:var(--r-lg);padding:11px 15px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px;transition:all .15s}
+.log-row:hover{background:var(--bg4)}
+code{background:rgba(167,139,250,.12);color:var(--purple);border-radius:3px;padding:1px 6px;font-family:var(--mono);font-size:11px}
+code.cb{background:rgba(56,189,248,.1);color:var(--blue)}
+code.cg{background:rgba(45,212,191,.1);color:var(--green)}
+code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
 @keyframes tIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}.proj-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.proj-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}#content{padding:14px}}
@@ -224,9 +231,14 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
     <div class="sb-user"><div class="sb-user-name" id="sbn">—</div><div class="sb-user-role" id="sbr">—</div></div>
     <div class="sb-nav">
       <button class="nav-item active" onclick="navTo('dashboard')" id="nav-dashboard"><span>🏠</span><span>Dashboard</span></button>
+      <div class="sb-section">MONITORING</div>
+      <button class="nav-item" onclick="navTo('sewa')" id="nav-sewa"><span>📦</span><span>Sewa</span><span class="bcnt hidden" id="nrc-sewa" style="background:rgba(56,189,248,.15);color:var(--blue)">0</span></button>
       <button class="nav-item" onclick="navTo('reminders')" id="nav-reminders"><span>🔔</span><span>Reminders</span><span class="bcnt hidden" id="nrc" style="background:rgba(251,191,36,.15);color:var(--yellow)">0</span></button>
       <button class="nav-item" onclick="navTo('non-sewa')" id="nav-non-sewa"><span>📋</span><span>Non-Sewa</span><span class="bcnt hidden" id="nrc-ns" style="background:rgba(167,139,250,.15);color:var(--purple)">0</span></button>
+      <button class="nav-item" onclick="navTo('lainnya')" id="nav-lainnya"><span>🗂️</span><span>Lainnya</span><span class="bcnt hidden" id="nrc-lainnya" style="background:rgba(251,191,36,.15);color:var(--yellow)">0</span></button>
       <div id="admin-nav" class="hidden">
+        <div class="sb-section">ADMIN</div>
+        <button class="nav-item" onclick="navTo('activity-log')" id="nav-activity-log"><span>📝</span><span>Activity Log</span></button>
         <button class="nav-item" onclick="navTo('projects-manage')" id="nav-projects-manage"><span>⚙️</span><span>Kelola Project</span></button>
       </div>
       <div class="sb-section">PROJECTS</div>
@@ -250,7 +262,7 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
       </div>
       <div class="tb-right">
         <button class="pill-alert hidden" id="pilla" onclick="navTo('reminders')">⚠️ 0</button>
-        <button class="btn-add hidden" id="btnadd" onclick="openTaskModal(null)">➕ Tambah Task</button>
+        <button class="btn-add hidden" id="btnadd" onclick="openTaskModal(null)" style="font-size:13px;padding:7px 16px">➕ Tambah Task</button>
       </div>
     </header>
 
@@ -296,6 +308,46 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
           <button class="fpill" onclick="setNSTab('nonsewa_other',this)">📌 Lainnya</button>
         </div>
         <div id="ns-list"><div class="loading">⏳ Memuat data...</div></div>
+      </div>
+      <!-- SEWA PAGE -->
+      <div class="page" id="page-sewa">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div class="sec-title" style="margin-bottom:0;color:var(--blue)">📦 Semua Task Sewa</div>
+          <button class="btn-add" onclick="openTaskModal(null)">➕ Tambah Task</button>
+        </div>
+        <div class="cat-filter" id="sewa-catf"></div>
+        <div id="sewa-list"><div class="loading">⏳ Memuat data...</div></div>
+      </div>
+      <!-- LAINNYA PAGE -->
+      <div class="page" id="page-lainnya">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div class="sec-title" style="margin-bottom:0;color:var(--yellow)">🗂️ Reminder Lainnya</div>
+          <button class="btn-add" style="background:linear-gradient(135deg,var(--yellow),var(--yellow-d));color:var(--bg)" onclick="openLainnyaModal(null)">➕ Tambah</button>
+        </div>
+        <div style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.2);border-radius:var(--r-md);padding:10px 14px;margin-bottom:14px;font-size:13px;color:var(--tx2)">
+          💡 Gunakan menu ini untuk reminder hal-hal lain di luar kategori Sewa dan Non-Sewa — seperti meeting rutin, perpanjangan dokumen, agenda penting, dsb.
+        </div>
+        <div id="lainnya-list"><div class="loading">⏳ Memuat data...</div></div>
+      </div>
+      <!-- ACTIVITY LOG PAGE -->
+      <div class="page" id="page-activity-log">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div class="sec-title" style="margin-bottom:0;color:var(--green)">📝 Activity Log</div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <select class="fi" id="log-filter-type" style="width:160px;font-size:12px;padding:6px 10px" onchange="renderActivityLog()">
+              <option value="all">Semua Aksi</option>
+              <option value="create">➕ Tambah</option>
+              <option value="update">✏️ Edit</option>
+              <option value="close">✅ Close/Done</option>
+              <option value="delete">🗑️ Hapus</option>
+              <option value="reminder">🔔 Reminder</option>
+            </select>
+            <select class="fi" id="log-filter-project" style="width:160px;font-size:12px;padding:6px 10px" onchange="renderActivityLog()">
+              <option value="all">Semua Project</option>
+            </select>
+          </div>
+        </div>
+        <div id="log-list"><div class="loading">⏳ Memuat data...</div></div>
       </div>
       <!-- KELOLA PROJECT -->
       <div class="page" id="page-projects-manage">
@@ -372,10 +424,14 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
       </div>
     </div>
     <div class="fsec">
-      <div class="fsec-title" style="color:var(--purple)">🔔 Kontak Reminder</div>
-      <div class="fg"><label class="fl">No. WhatsApp</label><input class="fi" id="f-wa" placeholder="+628xxxxxxxxxx"/></div>
-      <div class="fg"><label class="fl">Telegram @username / Chat ID</label><input class="fi" id="f-tg" placeholder="@username atau -100xxxxxxx"/></div>
-      <div class="fg" style="margin-bottom:0"><label class="fl">Email</label><input class="fi" type="email" id="f-email" placeholder="om@perusahaan.com"/></div>
+      <div class="fsec-title" style="color:var(--purple)">🔔 Kontak Reminder <span style="font-size:10px;font-weight:400;color:var(--tx3)">(pisahkan dengan koma untuk lebih dari 1 penerima)</span></div>
+      <div class="fg"><label class="fl">📱 No. WhatsApp</label><input class="fi" id="f-wa" placeholder="+6281234, +6285678, ..."/></div>
+      <div class="fg"><label class="fl">✈️ Telegram @username / Chat ID</label><input class="fi" id="f-tg" placeholder="@user1, @user2, -100xxxxxxx, ..."/></div>
+      <div class="fg"><label class="fl">📧 Email</label><input class="fi" id="f-email" placeholder="user1@co.com, user2@co.com, ..."/></div>
+      <div class="fg" style="margin-bottom:0">
+        <label class="fl">🔗 Webhook N8N / OpenClaw <span style="font-size:10px;font-weight:400;color:var(--tx3);text-transform:none;letter-spacing:0">(untuk notifikasi otomatis)</span></label>
+        <input class="fi" id="f-webhook" placeholder="https://n8n.domain.com/webhook/ict-reminder"/>
+      </div>
     </div>
     <div class="fg"><label class="fl">Catatan</label><textarea class="fi" id="f-notes" rows="2" placeholder="No. kontrak, keterangan tambahan..."></textarea></div>
     <div class="mactions"><button class="bcx" onclick="cm('task')">Batal</button><button class="bcg" onclick="saveTask()">💾 Simpan Task</button></div>
@@ -397,7 +453,13 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
     </div>
     <div class="fg"><label class="fl hl">Nomor SR (Service Request) ★</label><input class="fi" id="f-sr" placeholder="Contoh: SR-2025-0042"/></div>
     <div class="fg"><label class="fl" style="color:var(--green)">Nomor PO (Purchase Order) ★</label><input class="fi" id="f-po" placeholder="Contoh: PO-2025-0099"/></div>
-    <label class="cbrow" onclick="toggleNP()"><input type="checkbox" id="chknp" checked/><span>Input Masa Sewa Baru setelah Close Task</span></label>
+    <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:13px">
+      <label class="cbrow" onclick="toggleNP()"><input type="checkbox" id="chknp" checked/><label for="chknp" style="font-size:13px;color:var(--tx1);cursor:pointer">🔄 Input Masa Sewa Baru setelah Close</label></label>
+      <label class="cbrow" style="background:rgba(248,113,113,.06);border-color:rgba(248,113,113,.2)"><input type="checkbox" id="chkberakhir" onchange="toggleKontrakBerakhir()"/><label for="chkberakhir" style="font-size:13px;color:var(--red);cursor:pointer">🚫 Kontrak Berakhir (tidak diperpanjang)</label></label>
+    </div>
+    <div id="berakhir-info" class="hidden" style="background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.25);border-radius:var(--r-md);padding:10px 13px;margin-bottom:13px;font-size:12px;color:var(--tx2)">
+      ⚠️ Kontrak ini akan ditandai <strong style="color:var(--red)">BERAKHIR PERMANEN</strong> — tidak ada masa sewa baru. Pastikan sudah ada konfirmasi dari pihak terkait.
+    </div>
     <div id="npf"><div class="fr2" style="margin-bottom:13px">
       <div class="fg" style="margin-bottom:0"><label class="fl">Mulai Sewa Baru ★</label><input class="fi" type="date" id="f-ns"/></div>
       <div class="fg" style="margin-bottom:0"><label class="fl">Akhir Sewa Baru ★</label><input class="fi" type="date" id="f-ne"/></div>
@@ -544,13 +606,49 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
       <div class="fg" style="margin-bottom:0"><label class="fl">Deadline ★</label><input class="fi" type="date" id="ns-f-end"/></div>
     </div>
     <div class="fsec">
-      <div class="fsec-title" style="color:var(--purple)">🔔 Kontak Reminder</div>
-      <div class="fg"><label class="fl">No. WhatsApp</label><input class="fi" id="ns-f-wa" placeholder="+628xxxxxxxxxx"/></div>
-      <div class="fg"><label class="fl">Telegram @username / Chat ID</label><input class="fi" id="ns-f-tg" placeholder="@username atau -100xxxxxxx"/></div>
-      <div class="fg" style="margin-bottom:0"><label class="fl">Email</label><input class="fi" type="email" id="ns-f-email" placeholder="om@perusahaan.com"/></div>
+      <div class="fsec-title" style="color:var(--purple)">🔔 Kontak Reminder <span style="font-size:10px;font-weight:400;color:var(--tx3)">(pisahkan dengan koma untuk lebih dari 1 penerima)</span></div>
+      <div class="fg"><label class="fl">📱 No. WhatsApp</label><input class="fi" id="ns-f-wa" placeholder="+6281234, +6285678, ..."/></div>
+      <div class="fg"><label class="fl">✈️ Telegram @username / Chat ID</label><input class="fi" id="ns-f-tg" placeholder="@user1, @user2, -100xxxxxxx, ..."/></div>
+      <div class="fg"><label class="fl">📧 Email</label><input class="fi" id="ns-f-email" placeholder="user1@co.com, user2@co.com, ..."/></div>
+      <div class="fg" style="margin-bottom:0">
+        <label class="fl">🔗 Webhook N8N / OpenClaw</label>
+        <input class="fi" id="ns-f-webhook" placeholder="https://n8n.domain.com/webhook/ict-reminder"/>
+      </div>
     </div>
     <div class="fg"><label class="fl">Catatan</label><textarea class="fi" id="ns-f-notes" rows="2" placeholder="Keterangan tambahan..."></textarea></div>
     <div class="mactions"><button class="bcx" onclick="cm('ns')">Batal</button><button class="bcg" onclick="saveNSItem()" style="background:linear-gradient(135deg,var(--purple),#7c3aed)">💾 Simpan</button></div>
+  </div>
+</div>
+
+<!-- MODAL LAINNYA -->
+<div class="modal-overlay" id="modal-lainnya">
+  <div class="mbox">
+    <div class="mhdr"><div class="mtitle" id="lainnya-mtitle" style="color:var(--yellow)">➕ Tambah Reminder Lainnya</div><button class="mclose" onclick="cm('lainnya')">✕</button></div>
+    <div id="lainnya-fp-field"><div class="fg"><label class="fl">Project Terkait</label><select class="fi" id="lainnya-f-pid"><option value="">— Tidak terkait project spesifik —</option></select></div></div>
+    <div class="fg"><label class="fl">Judul / Deskripsi ★</label><input class="fi" id="lainnya-f-title" placeholder="Contoh: Meeting Bulanan PHR, Perpanjangan Dokumen HSSE..."/></div>
+    <div class="fg"><label class="fl">Kategori</label>
+      <select class="fi" id="lainnya-f-cat">
+        <option value="meeting">📅 Meeting / Rapat</option>
+        <option value="dokumen">📄 Perpanjangan Dokumen</option>
+        <option value="agenda">📌 Agenda Penting</option>
+        <option value="followup">🔁 Follow Up</option>
+        <option value="lainnya">🗂️ Lainnya</option>
+      </select>
+    </div>
+    <div class="fg"><label class="fl">PIC / Penanggungjawab</label><input class="fi" id="lainnya-f-pic" placeholder="Nama atau departemen"/></div>
+    <div class="fr2" style="margin-bottom:13px">
+      <div class="fg" style="margin-bottom:0"><label class="fl">Tanggal Mulai</label><input class="fi" type="date" id="lainnya-f-start"/></div>
+      <div class="fg" style="margin-bottom:0"><label class="fl">Deadline ★</label><input class="fi" type="date" id="lainnya-f-end"/></div>
+    </div>
+    <div class="fsec">
+      <div class="fsec-title" style="color:var(--yellow)">🔔 Kontak Reminder <span style="font-size:10px;font-weight:400;color:var(--tx3)">(pisahkan koma untuk lebih dari 1)</span></div>
+      <div class="fg"><label class="fl">📱 WhatsApp</label><input class="fi" id="lainnya-f-wa" placeholder="+6281234, +6285678, ..."/></div>
+      <div class="fg"><label class="fl">✈️ Telegram</label><input class="fi" id="lainnya-f-tg" placeholder="@user1, @user2, ..."/></div>
+      <div class="fg"><label class="fl">📧 Email</label><input class="fi" id="lainnya-f-email" placeholder="user1@co.com, user2@co.com, ..."/></div>
+      <div class="fg" style="margin-bottom:0"><label class="fl">🔗 Webhook N8N / OpenClaw</label><input class="fi" id="lainnya-f-webhook" placeholder="https://n8n.domain.com/webhook/..."/></div>
+    </div>
+    <div class="fg"><label class="fl">Catatan</label><textarea class="fi" id="lainnya-f-notes" rows="2" placeholder="Keterangan tambahan..."></textarea></div>
+    <div class="mactions"><button class="bcx" onclick="cm('lainnya')">Batal</button><button class="bcg" onclick="saveLainnya()" style="background:linear-gradient(135deg,var(--yellow),var(--yellow-d));color:var(--bg)">💾 Simpan</button></div>
   </div>
 </div>
 
@@ -626,12 +724,13 @@ const DEFAULT_PROJECTS = [
 ];
 
 // ─── STATE ─────────────────────────────────────────────────────────
-let UP=null, PROJECTS=[], TASKS=[], NON_SEWA_ITEMS=[];
+let UP=null, PROJECTS=[], TASKS=[], NON_SEWA_ITEMS=[], LAINNYA_ITEMS=[], ACTIVITY_LOGS=[];
 let curPage="dashboard", curProjId=null, curCat="all";
 let aeId=null, acTask=null, arTask=null, selMethod="whatsapp", selCatId=null;
 let selIconV="📷", selColorV="#38bdf8", editProjId=null;
-let offProjects=null, offTasks=null, offNonSewa=null;
+let offProjects=null, offTasks=null, offNonSewa=null, offLainnya=null, offLogs=null;
 let nsTab="laporan", nsEditId=null, nsSelSubtype=null;
+let lainnyaEditId=null;
 
 // ─── HELPERS ───────────────────────────────────────────────────────
 function du(v){if(!v)return 0;const t=new Date();t.setHours(0,0,0,0);const e=new Date(v);e.setHours(0,0,0,0);return Math.ceil((e-t)/864e5);}
@@ -650,6 +749,25 @@ function esc(s){if(!s)return"";return String(s).replace(/&/g,"&amp;").replace(/<
 function getAlerts(){const c=new Date();c.setDate(c.getDate()+REMINDER_DAYS);return(isAdmin()?TASKS:TASKS.filter(t=>t.projectId===UP?.projectId)).filter(t=>t.status!=="closed"&&t.endDate&&new Date(t.endDate)<=c).sort((a,b)=>new Date(a.endDate)-new Date(b.endDate));}
 function uid(){return db.ref("tasks").push().key;}
 function now(){return new Date().toISOString();}
+
+// ─── ACTIVITY LOG ──────────────────────────────────────────────────
+async function writeLog(action, module, itemId, itemName, details={}){
+  try{
+    const logKey=db.ref("activity_logs").push().key;
+    await db.ref("activity_logs/"+logKey).set({
+      action,          // create|update|close|done|delete|reminder|login|logout
+      module,          // task_sewa|non_sewa|lainnya|project|auth
+      itemId:itemId||"",
+      itemName:itemName||"",
+      details,
+      userId:UP?.uid||"",
+      userName:UP?.name||UP?.email||"unknown",
+      userRole:UP?.role||"",
+      timestamp:now(),
+      projectId:details?.projectId||"",
+    });
+  }catch(e){console.warn("Log gagal:",e.message);}
+}
 function toast(msg,color="#2dd4bf"){const tc=$("tc");const t=document.createElement("div");t.className="toast";t.style.borderLeftColor=color;t.style.borderColor=color+"44";t.textContent=msg;tc.appendChild(t);setTimeout(()=>t.remove(),3500);}
 
 // ─── AUTH ──────────────────────────────────────────────────────────
@@ -667,10 +785,12 @@ auth.onAuthStateChanged(async user=>{
       }
     }catch(e){toast("❌ Gagal login: "+e.message,"#f87171");}
   }else{
-    UP=null;PROJECTS=[];TASKS=[];NON_SEWA_ITEMS=[];
+    UP=null;PROJECTS=[];TASKS=[];NON_SEWA_ITEMS=[];LAINNYA_ITEMS=[];ACTIVITY_LOGS=[];
     if(offProjects){offProjects();offProjects=null;}
     if(offTasks){offTasks();offTasks=null;}
     if(offNonSewa){offNonSewa();offNonSewa=null;}
+    if(offLainnya){offLainnya();offLainnya=null;}
+    if(offLogs){offLogs();offLogs=null;}
     $("app").classList.add("hidden");
     $("login-screen").classList.add("active");
   }
@@ -688,9 +808,12 @@ async function doLogin(){
 }
 function showErr(m){$("lerr").textContent=m;$("lerr").classList.add("show");}
 async function doLogout(){
+  await writeLog("logout","auth",UP?.uid,UP?.name||UP?.email,{});
   if(offProjects){offProjects();offProjects=null;}
   if(offTasks){offTasks();offTasks=null;}
   if(offNonSewa){offNonSewa();offNonSewa=null;}
+  if(offLainnya){offLainnya();offLainnya=null;}
+  if(offLogs){offLogs();offLogs=null;}
   await auth.signOut();
 }
 $("ip").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin();});
@@ -719,10 +842,13 @@ function initApp(){
   $("sbn").textContent=UP.name||UP.email;
   $("sbr").textContent=isAdmin()?"👑 Administrator":"👤 Operational Manager";
   if(isAdmin())$("admin-nav").classList.remove("hidden");
-  buildProjNav();buildProjSel();buildCatSelector();buildNSProjSel();
+  buildProjNav();buildProjSel();buildCatSelector();buildNSProjSel();buildLainnyaProjSel();
   subscribeProjects();
   subscribeTasks();
   subscribeNonSewa();
+  subscribeLainnya();
+  if(isAdmin())subscribeActivityLogs();
+  writeLog("login","auth",UP.uid,UP.name||UP.email,{});
 }
 
 // ─── REAL-TIME LISTENERS ───────────────────────────────────────────
@@ -732,7 +858,7 @@ function subscribeProjects(){
   const handler=snap=>{
     if(snap.exists())PROJECTS=Object.entries(snap.val()).map(([id,v])=>({id,...v}));
     else PROJECTS=[...DEFAULT_PROJECTS];
-    buildProjNav();buildProjSel();updateUI();
+    buildProjNav();buildProjSel();buildLainnyaProjSel();updateUI();
   };
   ref.on("value",handler);
   offProjects=()=>ref.off("value",handler);
@@ -816,12 +942,16 @@ function navTo(page){
   document.querySelectorAll(".nav-item").forEach(b=>b.classList.remove("active"));
   $("page-"+page).classList.add("active");$("nav-"+page)?.classList.add("active");
   $("btnadd").classList.add("hidden");
-  const titles={dashboard:"🏠 Dashboard",reminders:"🔔 Reminders","projects-manage":"⚙️ Kelola Project","non-sewa":"📋 Reminder Non-Sewa"};
+  const titles={dashboard:"🏠 Dashboard",sewa:"📦 Task Sewa",reminders:"🔔 Reminders","non-sewa":"📋 Non-Sewa",lainnya:"🗂️ Lainnya","activity-log":"📝 Activity Log","projects-manage":"⚙️ Kelola Project"};
   $("tbt").textContent=titles[page]||page;
   if(page==="reminders")renderReminders();
   if(page==="projects-manage")renderProjectsManage();
   if(page==="dashboard")renderDashboard();
   if(page==="non-sewa"){renderNonSewa();$("btnadd").classList.remove("hidden");}
+  if(page==="sewa"){renderSewaPage();$("btnadd").classList.remove("hidden");}
+  if(page==="lainnya"){renderLainnya();$("btnadd").classList.remove("hidden");$("btnadd").onclick=()=>openLainnyaModal(null);}
+  else{$("btnadd").onclick=()=>openTaskModal(null);if(page==="sewa")$("btnadd").classList.remove("hidden");}
+  if(page==="activity-log")renderActivityLog();
 }
 function navToProject(id){
   curPage="project";curProjId=id;curCat="all";
@@ -843,6 +973,9 @@ function updateUI(){
   else if(curPage==="project")renderProjectPage();
   else if(curPage==="projects-manage")renderProjectsManage();
   else if(curPage==="non-sewa")renderNonSewa();
+  else if(curPage==="sewa")renderSewaPage();
+  else if(curPage==="lainnya")renderLainnya();
+  else if(curPage==="activity-log")renderActivityLog();
 }
 function updateStats(){
   const mine=myTasks();const active=mine.filter(t=>t.status!=="closed");
@@ -851,6 +984,8 @@ function updateStats(){
   $("s-expired").textContent=active.filter(t=>du(t.endDate)<0).length;
   $("s-closed").textContent=mine.filter(t=>t.status==="closed").length;
   updateNSBadge();
+  updateSewaBadge();
+  updateLainnyaBadge();
 }
 function updateBadges(){
   PROJECTS.forEach(p=>{const el=$("nb-"+p.id);if(el)el.textContent=TASKS.filter(t=>t.projectId===p.id&&t.status!=="closed").length;});
@@ -862,7 +997,7 @@ function updateAlertPill(){
 }
 
 // ─── DASHBOARD ─────────────────────────────────────────────────────
-function renderDashboard(){renderProjOverview();renderAlertTable();renderNSAlertTable();}
+function renderDashboard(){renderProjOverview();renderAlertTable();renderNSAlertTable();renderN8NNote();}
 function renderProjOverview(){
   const grid=$("pog");grid.innerHTML="";
   myProjects().forEach(p=>{
@@ -917,7 +1052,19 @@ function renderNSAlertTable(){
     tbody.appendChild(tr);
   });
 }
-function renderN8NNote(){}
+function renderN8NNote(){
+  const nc=$("n8n-container");
+  if(isAdmin()){
+    nc.innerHTML=`<div style="background:var(--bg3);border:1px solid rgba(167,139,250,.25);border-radius:var(--r-lg);padding:14px 16px;margin-top:12px">
+      <div style="font-family:var(--syne);font-weight:700;font-size:13px;color:var(--purple);margin-bottom:8px">🔗 Integrasi N8N / OpenClaw</div>
+      <div style="font-size:12px;color:var(--tx2);line-height:1.8">
+        Setiap task mendukung <code>webhookUrl</code> untuk notifikasi otomatis via N8N atau OpenClaw.<br>
+        Path Firebase: <code class="cb">/tasks</code> · <code class="cb">/non_sewa</code> · <code class="cb">/lainnya</code><br>
+        Semua aksi tercatat di <code class="cg">/activity_logs</code> — dapat dibaca oleh agent eksternal.
+      </div>
+    </div>`;
+  } else nc.innerHTML="";
+}
 
 // ─── REMINDERS ─────────────────────────────────────────────────────
 function renderReminders(){
@@ -958,8 +1105,11 @@ function buildCard(task,showProj){
   const remCount=task.reminders?Object.keys(task.reminders).length:0;
   const lastRem=task.reminders?Object.values(task.reminders).sort((a,b)=>new Date(b.sentAt)-new Date(a.sentAt))[0]:null;
   let remlog=remCount?`<div style="margin-top:5px;font-size:10px;color:var(--purple)">🔔 ${remCount}x reminder · terakhir via ${lastRem.method} (${fd(lastRem.sentAt)})</div>`:"";
-  let extra=task.srNumber?`<div style="margin-top:3px;font-size:10px;color:var(--green);font-weight:600">✅ SR: ${esc(task.srNumber)}${task.poNumber?` &nbsp;·&nbsp; <span style="color:#34d399">PO: ${esc(task.poNumber)}</span>`:""}</div>`:"";
-  if(task.notes)extra+=`<div style="font-size:11px;color:var(--tx3);font-style:italic;margin-top:3px">💬 ${esc(task.notes)}</div>`;
+  let extra=task.srNumber?`<div style="margin-top:3px;font-size:12px;color:var(--green);font-weight:600">✅ SR: ${esc(task.srNumber)}${task.poNumber?` &nbsp;·&nbsp; <span style="color:#34d399">PO: ${esc(task.poNumber)}</span>`:""}${task.kontrakBerakhir?` &nbsp;<span style="color:#f87171">🚫 Kontrak Berakhir</span>`:""}</div>`:"";
+  if(task.closedByName)extra+=`<div style="font-size:11px;color:var(--tx3);margin-top:2px">✍️ Closed by: <strong style="color:var(--tx2)">${esc(task.closedByName)}</strong></div>`;
+  if(!task.srNumber&&task.createdByName)extra+=`<div style="font-size:11px;color:var(--tx3);margin-top:2px">✍️ Dibuat oleh: <strong style="color:var(--tx2)">${esc(task.createdByName)}</strong></div>`;
+  if(task.notes)extra+=`<div style="font-size:12px;color:var(--tx3);font-style:italic;margin-top:3px">💬 ${esc(task.notes)}</div>`;
+  if(task.webhookUrl)extra+=`<div style="font-size:11px;color:var(--purple);margin-top:2px">🔗 Webhook: aktif</div>`;
   let acts="";
   if(st!=="closed"){
     if((st==="expiring"||st==="expired")&&canClose(task))acts+=`<button class="ab yellow" onclick="openRemind('${task.id}')">🔔 Catat Reminder</button>`;
@@ -1078,22 +1228,39 @@ async function saveTask(){
 // ── CLOSE MODAL ──
 function openClose(id){
   acTask=TASKS.find(t=>t.id===id);if(!acTask)return;
-  $("csum").innerHTML=`<strong style="color:var(--tx1);font-size:13px">${esc(acTask.itemName)}</strong><br><span style="font-size:11px;color:var(--tx2)">🏢 ${esc(acTask.vendor)} · 📅 Berakhir: ${fd(acTask.endDate)}</span>`;
+  $("csum").innerHTML=`<strong style="color:var(--tx1);font-size:14px">${esc(acTask.itemName)}</strong><br><span style="font-size:12px;color:var(--tx2)">🏢 ${esc(acTask.vendor)} · 📅 Berakhir: ${fd(acTask.endDate)}</span>`;
   $("f-sr").value="";$("f-po").value="";$("f-cn").value="";$("f-ns").value="";$("f-ne").value="";
   $("chknp").checked=true;$("npf").style.display="block";
+  $("chkberakhir").checked=false;$("berakhir-info").classList.add("hidden");
   $("modal-close").classList.add("open");
 }
-function toggleNP(){$("npf").style.display=$("chknp").checked?"block":"none";}
+function toggleNP(){
+  const np=$("chknp");$("npf").style.display=np.checked?"block":"none";
+  if(np.checked)$("chkberakhir").checked=false,$("berakhir-info").classList.add("hidden");
+}
+function toggleKontrakBerakhir(){
+  const kb=$("chkberakhir");$("berakhir-info").classList.toggle("hidden",!kb.checked);
+  if(kb.checked){$("chknp").checked=false;$("npf").style.display="none";}
+}
 async function confirmClose(){
   const sr=$("f-sr").value.trim();if(!sr){toast("❌ Nomor SR wajib diisi!","#f87171");return;}
-  const po=$("f-po").value.trim();if(!po){toast("❌ Nomor PO wajib diisi! Task baru bisa di-Close jika PO sudah diterbitkan.","#f87171");return;}
-  const addNew=$("chknp").checked;const ns=$("f-ns").value;const ne=$("f-ne").value;
+  const po=$("f-po").value.trim();if(!po){toast("❌ Nomor PO wajib diisi!","#f87171");return;}
+  const addNew=$("chknp").checked;const kontrakBerakhir=$("chkberakhir").checked;
+  const ns=$("f-ns").value;const ne=$("f-ne").value;
   if(addNew&&(!ns||!ne)){toast("❌ Isi periode sewa baru!","#f87171");return;}
+  const closeData={
+    status:"closed",srNumber:sr,poNumber:po,closeNotes:$("f-cn").value.trim(),
+    closedAt:now(),closedBy:UP.uid,closedByName:UP.name||UP.email,
+    needsReminder:false,kontrakBerakhir:kontrakBerakhir,
+  };
   try{
-    await db.ref("tasks/"+acTask.id).update({
-      status:"closed",srNumber:sr,poNumber:po,closeNotes:$("f-cn").value.trim(),
-      closedAt:now(),closedBy:UP.uid,needsReminder:false,
+    await db.ref("tasks/"+acTask.id).update(closeData);
+    await writeLog("close","task_sewa",acTask.id,acTask.itemName,{
+      srNumber:sr,poNumber:po,kontrakBerakhir,projectId:acTask.projectId
     });
+    // Fire webhook if configured
+    if(acTask.webhookUrl)fireWebhook(acTask.webhookUrl,{type:"task_closed",task:acTask,sr,po,closedBy:UP.name||UP.email});
+    let msg="✅ Task di-close!";
     if(addNew){
       const newKey=db.ref("tasks").push().key;
       await db.ref("tasks/"+newKey).set({
@@ -1101,11 +1268,14 @@ async function confirmClose(){
         itemName:acTask.itemName,vendor:acTask.vendor,notes:acTask.notes||"",
         startDate:ns,endDate:ne,
         contactWa:acTask.contactWa||"",contactTg:acTask.contactTg||"",contactEmail:acTask.contactEmail||"",
+        webhookUrl:acTask.webhookUrl||"",
         status:"active",needsReminder:du(ne)<=REMINDER_DAYS,
-        previousTaskId:acTask.id,createdAt:now(),createdBy:UP.uid,
+        previousTaskId:acTask.id,createdAt:now(),createdBy:UP.uid,createdByName:UP.name||UP.email,
       });
-    }
-    cm("close");toast("✅ Task di-close!"+(addNew?" Masa sewa baru ditambahkan.":""),"#2dd4bf");
+      await writeLog("create","task_sewa",newKey,acTask.itemName+" (perpanjangan)",{projectId:acTask.projectId});
+      msg+=" Masa sewa baru ditambahkan.";
+    }else if(kontrakBerakhir){msg+=" Kontrak ditandai BERAKHIR.";}
+    cm("close");toast(msg,"#2dd4bf");
   }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
 }
 
@@ -1124,9 +1294,11 @@ async function confirmRemind(){
   const remKey=db.ref("tasks/"+arTask.id+"/reminders").push().key;
   try{
     await db.ref("tasks/"+arTask.id).update({
-      [`reminders/${remKey}`]:{method:selMethod,sentAt:now(),sentBy:UP.uid,daysLeft:days},
+      [`reminders/${remKey}`]:{method:selMethod,sentAt:now(),sentBy:UP.uid,sentByName:UP.name||UP.email,daysLeft:days},
       lastReminderAt:now(),lastReminderMethod:selMethod,needsReminder:true,updatedAt:now(),
     });
+    await writeLog("reminder","task_sewa",arTask.id,arTask.itemName,{method:selMethod,daysLeft:days,projectId:arTask.projectId});
+    if(arTask.webhookUrl)fireWebhook(arTask.webhookUrl,{type:"reminder",task:arTask,method:selMethod,daysLeft:days,sentBy:UP.name||UP.email});
     cm("remind");toast("🔔 Reminder berhasil dicatat.","#fbbf24");
   }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
 }
@@ -1195,7 +1367,10 @@ function renderNonSewa(){
     let remlog=remCount?`<div style="margin-top:5px;font-size:10px;color:var(--purple)">🔔 ${remCount}x reminder · terakhir via ${lastRem.method} (${fd(lastRem.sentAt)})</div>`:"";
     let extra=item.pic?`<div style="margin-top:3px;font-size:10px;color:var(--tx3)">👤 PIC: <strong style="color:var(--tx2)">${esc(item.pic)}</strong></div>`:"";
     if(item.notes)extra+=`<div style="font-size:11px;color:var(--tx3);font-style:italic;margin-top:3px">💬 ${esc(item.notes)}</div>`;
-    if(isDone&&item.evidence)extra+=`<div style="margin-top:5px;font-size:10px;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:5px;padding:4px 9px;color:var(--purple)">📎 Evidence: <strong>${esc(item.evidence.fileName)}</strong> · ${esc(item.evidence.description)}</div>`;
+    if(isDone&&item.evidence)extra+=`<div style="margin-top:5px;font-size:12px;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:5px;padding:4px 9px;color:var(--purple)">📎 Evidence: <strong>${esc(item.evidence.fileName)}</strong> · ${esc(item.evidence.description)}</div>`;
+    if(isDone&&item.doneByName)extra+=`<div style="font-size:11px;color:var(--tx3);margin-top:2px">✍️ Done by: <strong style="color:var(--tx2)">${esc(item.doneByName)}</strong></div>`;
+    if(!isDone&&item.createdByName)extra+=`<div style="font-size:11px;color:var(--tx3);margin-top:2px">✍️ Dibuat: <strong style="color:var(--tx2)">${esc(item.createdByName)}</strong></div>`;
+    if(item.webhookUrl)extra+=`<div style="font-size:11px;color:var(--purple);margin-top:2px">🔗 Webhook: aktif</div>`;
 
     let acts="";
     if(!isDone){
@@ -1253,6 +1428,7 @@ function openNSModal(itemId){
     $("ns-f-wa").value=item.contactWa||"";
     $("ns-f-tg").value=item.contactTg||"";
     $("ns-f-email").value=item.contactEmail||"";
+    $("ns-f-webhook")&&($("ns-f-webhook").value=item.webhookUrl||"");
     $("ns-f-notes").value=item.notes||"";
   }else{
     document.querySelectorAll("#ns-cat-grid .cat-opt").forEach(b=>b.classList.remove("selected"));
@@ -1282,18 +1458,22 @@ async function saveNSItem(){
     title,pic:$("ns-f-pic").value.trim(),
     startDate:start,endDate:end,
     contactWa:$("ns-f-wa").value.trim(),contactTg:$("ns-f-tg").value.trim(),contactEmail:$("ns-f-email").value.trim(),
+    webhookUrl:$("ns-f-webhook")?.value.trim()||"",
     notes:$("ns-f-notes").value.trim(),
     needsReminder:du(end)<=REMINDER_DAYS,
     updatedAt:now(),updatedBy:UP.uid,
   };
   try{
     if(nsEditId){
+      data.updatedByName=UP.name||UP.email;
       await db.ref("non_sewa/"+nsEditId).update(data);
+      await writeLog("update","non_sewa",nsEditId,title,{projectId:projId,categoryId:catId});
       toast("✅ Item diperbarui!","#2dd4bf");
     }else{
       const newKey=db.ref("non_sewa").push().key;
-      data.status="active";data.createdAt=now();data.createdBy=UP.uid;
+      data.status="active";data.createdAt=now();data.createdBy=UP.uid;data.createdByName=UP.name||UP.email;
       await db.ref("non_sewa/"+newKey).set(data);
+      await writeLog("create","non_sewa",newKey,title,{projectId:projId,categoryId:catId});
       toast("✅ Item Non-Sewa ditambahkan!","#2dd4bf");
     }
     cm("ns");nsEditId=null;nsSelSubtype=null;
@@ -1354,11 +1534,14 @@ async function confirmNSDone(){
     uploadedBy:UP.uid,
   };
   try{
+    const nsItem=NON_SEWA_ITEMS.find(i=>i.id===nsCurrentDoneId);
     await db.ref("non_sewa/"+nsCurrentDoneId).update({
-      status:"done",doneAt:now(),doneBy:UP.uid,needsReminder:false,
+      status:"done",doneAt:now(),doneBy:UP.uid,doneByName:UP.name||UP.email,needsReminder:false,
       evidence:evidenceMeta,
       closeNotes:$("nsd-f-notes").value.trim(),
     });
+    await writeLog("done","non_sewa",nsCurrentDoneId,nsItem?.title||"",{evidence:evidenceMeta.fileName,projectId:nsItem?.projectId});
+    if(nsItem?.webhookUrl)fireWebhook(nsItem.webhookUrl,{type:"task_done",item:nsItem,evidence:evidenceMeta,doneBy:UP.name||UP.email});
     cm("ns-done");nsCurrentDoneId=null;nsEvidenceFile=null;
     toast("✅ Item ditandai Done dengan evidence terlampir!","#a78bfa");
   }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
@@ -1366,8 +1549,12 @@ async function confirmNSDone(){
 
 async function delNSItem(id){
   if(!confirm("Yakin hapus item ini?"))return;
-  try{await db.ref("non_sewa/"+id).remove();toast("🗑️ Item dihapus.","#64748b");}
-  catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+  const item=NON_SEWA_ITEMS.find(i=>i.id===id);
+  try{
+    await db.ref("non_sewa/"+id).remove();
+    await writeLog("delete","non_sewa",id,item?.title||id,{projectId:item?.projectId});
+    toast("🗑️ Item dihapus.","#64748b");
+  }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
 }
 
 // ─── NON-SEWA REMINDER ─────────────────────────────────────────────
@@ -1396,9 +1583,11 @@ async function confirmRemind(){
     const remKey=db.ref("non_sewa/"+nsId+"/reminders").push().key;
     try{
       await db.ref("non_sewa/"+nsId).update({
-        [`reminders/${remKey}`]:{method:selMethod,sentAt:now(),sentBy:UP.uid,daysLeft:days},
+        [`reminders/${remKey}`]:{method:selMethod,sentAt:now(),sentBy:UP.uid,sentByName:UP.name||UP.email,daysLeft:days},
         lastReminderAt:now(),lastReminderMethod:selMethod,needsReminder:true,updatedAt:now(),
       });
+      await writeLog("reminder","non_sewa",nsId,nsItem.title,{method:selMethod,daysLeft:days,projectId:nsItem.projectId});
+      if(nsItem.webhookUrl)fireWebhook(nsItem.webhookUrl,{type:"reminder",item:nsItem,method:selMethod,daysLeft:days,sentBy:UP.name||UP.email});
       cm("remind");modal.dataset.nsmode="";modal.dataset.nsid="";
       toast("🔔 Reminder Non-Sewa berhasil dicatat.","#a78bfa");
     }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
@@ -1410,9 +1599,11 @@ async function confirmRemind(){
   const remKey=db.ref("tasks/"+arTask.id+"/reminders").push().key;
   try{
     await db.ref("tasks/"+arTask.id).update({
-      [`reminders/${remKey}`]:{method:selMethod,sentAt:now(),sentBy:UP.uid,daysLeft:days},
+      [`reminders/${remKey}`]:{method:selMethod,sentAt:now(),sentBy:UP.uid,sentByName:UP.name||UP.email,daysLeft:days},
       lastReminderAt:now(),lastReminderMethod:selMethod,needsReminder:true,updatedAt:now(),
     });
+    await writeLog("reminder","task_sewa",arTask.id,arTask.itemName,{method:selMethod,daysLeft:days,projectId:arTask.projectId});
+    if(arTask.webhookUrl)fireWebhook(arTask.webhookUrl,{type:"reminder",task:arTask,method:selMethod,daysLeft:days,sentBy:UP.name||UP.email});
     cm("remind");toast("🔔 Reminder berhasil dicatat.","#fbbf24");
   }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
 }
@@ -1426,8 +1617,234 @@ function getNSAlerts(){
 // ── DELETE TASK ──
 async function delTask(id){
   if(!confirm("Yakin hapus task ini?"))return;
-  try{await db.ref("tasks/"+id).remove();toast("🗑️ Task dihapus.","#64748b");}
-  catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+  const t=TASKS.find(x=>x.id===id);
+  try{
+    await db.ref("tasks/"+id).remove();
+    await writeLog("delete","task_sewa",id,t?.itemName||id,{projectId:t?.projectId});
+    toast("🗑️ Task dihapus.","#64748b");
+  }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+}
+
+
+// ─── WEBHOOK FIRE ──────────────────────────────────────────────────
+function fireWebhook(url, payload){
+  if(!url)return;
+  fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({...payload,timestamp:now(),appName:"ICT Project Manager"})
+  }).catch(e=>console.warn("Webhook gagal:",e.message));
+}
+
+// ─── SEWA PAGE ─────────────────────────────────────────────────────
+function renderSewaPage(){
+  const tasks=isAdmin()?TASKS:TASKS.filter(t=>t.projectId===UP?.projectId);
+  // Build cat filter
+  const cf=$("sewa-catf");
+  const catCounts={};tasks.forEach(t=>{catCounts[t.categoryId]=(catCounts[t.categoryId]||0)+1;});
+  let html=`<button class="fpill ${curCat==="all"?"active":""}" onclick="setSewaCAT('all',this)">📋 Semua (${tasks.length})</button>`;
+  // Project filter pills
+  const projCounts={};tasks.forEach(t=>{projCounts[t.projectId]=(projCounts[t.projectId]||0)+1;});
+  Object.entries(projCounts).forEach(([pid,n])=>{const p=gp(pid);html+=`<button class="fpill" onclick="setSewaCAT('proj_${pid}',this)" style="border-color:${p.color}44;color:${p.color}">${p.icon} ${p.short} (${n})</button>`;});
+  cf.innerHTML=html;
+  // Render list
+  const list=$("sewa-list");
+  const filtered=curCat==="all"?tasks:curCat.startsWith("proj_")?tasks.filter(t=>t.projectId===curCat.replace("proj_","")):tasks;
+  if(!filtered.length){list.innerHTML=`<div class="empty"><div class="ei">📦</div>Belum ada task sewa.</div>`;return;}
+  list.innerHTML="";filtered.forEach(t=>list.appendChild(buildCard(t,true)));
+}
+function setSewaCAT(cat,btn){curCat=cat;document.querySelectorAll("#sewa-catf .fpill").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderSewaPage();}
+
+// ─── LAINNYA FUNCTIONS ─────────────────────────────────────────────
+function subscribeLainnya(){
+  if(offLainnya)offLainnya();
+  let ref=db.ref("lainnya");
+  if(!isAdmin())ref=ref.orderByChild("projectId").equalTo(UP.projectId);
+  const handler=snap=>{
+    if(snap.exists())LAINNYA_ITEMS=Object.entries(snap.val()).map(([id,v])=>({id,...v})).sort((a,b)=>new Date(a.endDate)-new Date(b.endDate));
+    else LAINNYA_ITEMS=[];
+    updateLainnyaBadge();
+    if(curPage==="lainnya")renderLainnya();
+  };
+  ref.on("value",handler);offLainnya=()=>ref.off("value",handler);
+}
+function updateLainnyaBadge(){
+  const items=(isAdmin()?LAINNYA_ITEMS:LAINNYA_ITEMS.filter(i=>i.projectId===UP?.projectId)).filter(i=>i.status!=="done");
+  const alert=items.filter(i=>du(i.endDate)<=REMINDER_DAYS).length;
+  const nb=$("nrc-lainnya");
+  if(nb){if(alert>0){nb.textContent=alert;nb.classList.remove("hidden");}else nb.classList.add("hidden");}
+}
+function renderLainnya(){
+  const list=$("lainnya-list");
+  const items=isAdmin()?LAINNYA_ITEMS:LAINNYA_ITEMS.filter(i=>i.projectId===UP?.projectId);
+  if(!items.length){list.innerHTML=`<div class="empty"><div class="ei">🗂️</div>Belum ada reminder lainnya.</div>`;return;}
+  list.innerHTML="";
+  items.forEach(item=>{
+    const days=du(item.endDate);const isDone=item.status==="done";
+    let sc=isDone?"#64748b":days<0?"#f87171":days<=REMINDER_DAYS?"#fbbf24":"#2dd4bf";
+    let sl=isDone?"Selesai":days<0?"Lewat Deadline":days<=REMINDER_DAYS?"Segera":"Aktif";
+    const p=gp(item.projectId);
+    const catIcons={meeting:"📅",dokumen:"📄",agenda:"📌",followup:"🔁",lainnya:"🗂️"};
+    const icon=catIcons[item.categoryId]||"🗂️";
+    const card=document.createElement("div");card.className="task-card";card.style.borderLeft=`3px solid ${sc}`;
+    let dbox=!isDone?`<div class="days-box" style="background:${sc}18;border:1px solid ${sc}33"><div class="dn" style="color:${sc}">${Math.abs(days)}</div><div class="dl">${days<0?"HARI LEWAT":"HARI LAGI"}</div></div>`:`<span class="badge" style="background:rgba(100,116,139,.1);color:#64748b;border-color:rgba(100,116,139,.2)">✅ Done</span>`;
+    let acts="";
+    if(!isDone){
+      acts+=`<button class="ab yellow" onclick="openNSRemind('${item.id}')">🔔 Reminder</button>`;
+      acts+=`<button class="ab green" onclick="markLainnyaDone('${item.id}')">✅ Done</button>`;
+      acts+=`<button class="ab blue" onclick="openLainnyaModal('${item.id}')">✏️ Edit</button>`;
+    }
+    if(isAdmin())acts+=`<button class="ab red" onclick="delLainnya('${item.id}')">🗑️ Hapus</button>`;
+    card.innerHTML=`<div class="tcrow"><div style="flex:1;min-width:0"><div class="tbadges"><span class="badge" style="background:${sc}18;color:${sc};border-color:${sc}33">${sl}</span><span class="badge" style="background:${p.color}18;color:${p.color};border-color:${p.color}33">${p.icon} ${p.short}</span><span class="badge" style="background:rgba(251,191,36,.08);color:var(--yellow);border-color:rgba(251,191,36,.2)">${icon} ${item.categoryId}</span></div><div class="ttitle">${esc(item.title)}</div>${item.pic?`<div style="font-size:12px;color:var(--tx3);margin-top:2px">👤 ${esc(item.pic)}</div>`:""}<div class="tdate">📅 ${fd(item.startDate||item.endDate)} → ${fd(item.endDate)}</div>${item.notes?`<div style="font-size:12px;color:var(--tx3);font-style:italic;margin-top:3px">💬 ${esc(item.notes)}</div>`:""}</div>${dbox}</div>${acts?`<div class="tactions">${acts}</div>`:""}`;
+    list.appendChild(card);
+  });
+}
+function buildLainnyaProjSel(){
+  const s=$("lainnya-f-pid");if(!s)return;
+  s.innerHTML='<option value="">— Tidak terkait project spesifik —</option>';
+  PROJECTS.forEach(p=>s.innerHTML+=`<option value="${p.id}">${p.icon} ${p.name}</option>`);
+}
+function openLainnyaModal(id){
+  lainnyaEditId=id;
+  const item=id?LAINNYA_ITEMS.find(i=>i.id===id):null;
+  $("lainnya-mtitle").textContent=item?"✏️ Edit Reminder Lainnya":"➕ Tambah Reminder Lainnya";
+  buildLainnyaProjSel();
+  if(item){
+    $("lainnya-f-pid").value=item.projectId||"";
+    $("lainnya-f-title").value=item.title||"";
+    $("lainnya-f-cat").value=item.categoryId||"lainnya";
+    $("lainnya-f-pic").value=item.pic||"";
+    $("lainnya-f-start").value=item.startDate||"";
+    $("lainnya-f-end").value=item.endDate||"";
+    $("lainnya-f-wa").value=item.contactWa||"";
+    $("lainnya-f-tg").value=item.contactTg||"";
+    $("lainnya-f-email").value=item.contactEmail||"";
+    $("lainnya-f-webhook").value=item.webhookUrl||"";
+    $("lainnya-f-notes").value=item.notes||"";
+  }else{
+    ["lainnya-f-title","lainnya-f-pic","lainnya-f-wa","lainnya-f-tg","lainnya-f-email","lainnya-f-webhook","lainnya-f-notes"].forEach(i=>{const el=$(i);if(el)el.value="";});
+    $("lainnya-f-start").value="";$("lainnya-f-end").value="";
+    $("lainnya-f-pid").value=isAdmin()?"":UP?.projectId||"";
+    $("lainnya-f-cat").value="lainnya";
+  }
+  $("modal-lainnya").classList.add("open");
+}
+async function saveLainnya(){
+  const title=$("lainnya-f-title").value.trim();
+  const end=$("lainnya-f-end").value;
+  if(!title||!end){toast("❌ Judul dan deadline wajib diisi!","#f87171");return;}
+  const data={
+    projectId:$("lainnya-f-pid").value||"",
+    title,categoryId:$("lainnya-f-cat").value,
+    pic:$("lainnya-f-pic").value.trim(),
+    startDate:$("lainnya-f-start").value,endDate:end,
+    contactWa:$("lainnya-f-wa").value.trim(),contactTg:$("lainnya-f-tg").value.trim(),
+    contactEmail:$("lainnya-f-email").value.trim(),webhookUrl:$("lainnya-f-webhook").value.trim(),
+    notes:$("lainnya-f-notes").value.trim(),
+    needsReminder:du(end)<=REMINDER_DAYS,updatedAt:now(),updatedBy:UP.uid,updatedByName:UP.name||UP.email,
+  };
+  try{
+    if(lainnyaEditId){
+      await db.ref("lainnya/"+lainnyaEditId).update(data);
+      await writeLog("update","lainnya",lainnyaEditId,title,{projectId:data.projectId});
+      toast("✅ Diperbarui!","#fbbf24");
+    }else{
+      const k=db.ref("lainnya").push().key;
+      data.status="active";data.createdAt=now();data.createdBy=UP.uid;data.createdByName=UP.name||UP.email;
+      await db.ref("lainnya/"+k).set(data);
+      await writeLog("create","lainnya",k,title,{projectId:data.projectId});
+      toast("✅ Reminder ditambahkan!","#fbbf24");
+    }
+    cm("lainnya");lainnyaEditId=null;
+  }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+}
+async function markLainnyaDone(id){
+  if(!confirm("Tandai selesai?"))return;
+  const item=LAINNYA_ITEMS.find(i=>i.id===id);
+  try{
+    await db.ref("lainnya/"+id).update({status:"done",doneAt:now(),doneBy:UP.uid,doneByName:UP.name||UP.email,needsReminder:false});
+    await writeLog("done","lainnya",id,item?.title||id,{projectId:item?.projectId});
+    toast("✅ Ditandai selesai!","#2dd4bf");
+  }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+}
+async function delLainnya(id){
+  if(!confirm("Yakin hapus?"))return;
+  const item=LAINNYA_ITEMS.find(i=>i.id===id);
+  try{
+    await db.ref("lainnya/"+id).remove();
+    await writeLog("delete","lainnya",id,item?.title||id,{projectId:item?.projectId});
+    toast("🗑️ Dihapus.","#64748b");
+  }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
+}
+
+// ─── ACTIVITY LOG FUNCTIONS ────────────────────────────────────────
+function subscribeActivityLogs(){
+  if(offLogs)offLogs();
+  const ref=db.ref("activity_logs").orderByChild("timestamp").limitToLast(500);
+  const handler=snap=>{
+    if(snap.exists())ACTIVITY_LOGS=Object.entries(snap.val()).map(([id,v])=>({id,...v})).reverse();
+    else ACTIVITY_LOGS=[];
+    if(curPage==="activity-log")renderActivityLog();
+    // populate project filter
+    const sel=$("log-filter-project");
+    if(sel&&sel.options.length===1){PROJECTS.forEach(p=>sel.innerHTML+=`<option value="${p.id}">${p.icon} ${p.short}</option>`);}
+  };
+  ref.on("value",handler);offLogs=()=>ref.off("value",handler);
+}
+function renderActivityLog(){
+  const list=$("log-list");if(!list)return;
+  const typeFilter=$("log-filter-type")?.value||"all";
+  const projFilter=$("log-filter-project")?.value||"all";
+  let logs=ACTIVITY_LOGS;
+  if(typeFilter!=="all")logs=logs.filter(l=>l.action===typeFilter);
+  if(projFilter!=="all")logs=logs.filter(l=>l.projectId===projFilter||l.details?.projectId===projFilter);
+  if(!logs.length){list.innerHTML=`<div class="empty"><div class="ei">📝</div>Belum ada log aktivitas.</div>`;return;}
+  const actionMeta={
+    create:{icon:"➕",color:"#2dd4bf",label:"Tambah"},
+    update:{icon:"✏️",color:"#38bdf8",label:"Edit"},
+    close:{icon:"✅",color:"#2dd4bf",label:"Close"},
+    done:{icon:"✅",color:"#a78bfa",label:"Done"},
+    delete:{icon:"🗑️",color:"#f87171",label:"Hapus"},
+    reminder:{icon:"🔔",color:"#fbbf24",label:"Reminder"},
+    login:{icon:"🔐",color:"#64748b",label:"Login"},
+    logout:{icon:"🚪",color:"#64748b",label:"Logout"},
+  };
+  const moduleMeta={task_sewa:"📦 Sewa",non_sewa:"📋 Non-Sewa",lainnya:"🗂️ Lainnya",project:"⚙️ Project",auth:"🔐 Auth"};
+  list.innerHTML="";
+  logs.forEach(log=>{
+    const am=actionMeta[log.action]||{icon:"•",color:"#64748b",label:log.action};
+    const row=document.createElement("div");
+    row.style.cssText=`background:var(--bg2);border:1px solid var(--brd);border-left:3px solid ${am.color};border-radius:var(--r-lg);padding:11px 15px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px`;
+    const ts=log.timestamp?new Date(log.timestamp).toLocaleString("id-ID",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"}):"—";
+    const proj=log.projectId?gp(log.projectId):null;
+    row.innerHTML=`
+      <div style="min-width:36px;height:36px;background:${am.color}18;border:1px solid ${am.color}33;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">${am.icon}</div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap">
+          <div>
+            <span style="font-size:12px;font-weight:700;color:${am.color}">${am.label}</span>
+            <span style="font-size:11px;color:var(--tx3);margin-left:6px">${moduleMeta[log.module]||log.module}</span>
+            ${proj?`<span style="font-size:11px;margin-left:6px;color:${proj.color}">${proj.icon} ${proj.short}</span>`:""}
+          </div>
+          <span style="font-size:11px;color:var(--tx3);white-space:nowrap;font-family:var(--mono)">${ts}</span>
+        </div>
+        <div style="font-size:13px;color:var(--tx1);font-weight:500;margin-top:3px">${esc(log.itemName||"—")}</div>
+        <div style="font-size:11px;color:var(--tx3);margin-top:2px">
+          👤 <strong style="color:var(--tx2)">${esc(log.userName||"—")}</strong> · ${esc(log.userRole||"")}
+          ${log.details?.srNumber?` · SR: <code>${esc(log.details.srNumber)}</code>`:""}
+          ${log.details?.poNumber?` · PO: <code>${esc(log.details.poNumber)}</code>`:""}
+          ${log.details?.method?` · via ${esc(log.details.method)}`:""}
+          ${log.details?.evidence?` · 📎 ${esc(log.details.evidence)}`:""}
+        </div>
+      </div>`;
+    list.appendChild(row);
+  });
+}
+
+// ─── SEWA BADGE ────────────────────────────────────────────────────
+function updateSewaBadge(){
+  const tasks=isAdmin()?TASKS:TASKS.filter(t=>t.projectId===UP?.projectId);
+  const alert=tasks.filter(t=>t.status!=="closed"&&du(t.endDate)<=REMINDER_DAYS).length;
+  const nb=$("nrc-sewa");
+  if(nb){if(alert>0){nb.textContent=alert;nb.classList.remove("hidden");}else nb.classList.add("hidden");}
 }
 
 // ─── PROJECT MODAL ─────────────────────────────────────────────────
@@ -1454,10 +1871,12 @@ async function saveProject(){
   const data={id,name,short,icon:selIconV,color:selColorV};
   try{
     if(editProjId){
-      await db.ref("projects/"+editProjId).update({name,short,icon:selIconV,color:selColorV,updatedAt:now()});
+      await db.ref("projects/"+editProjId).update({name,short,icon:selIconV,color:selColorV,updatedAt:now(),updatedBy:UP.uid,updatedByName:UP.name||UP.email});
+      await writeLog("update","project",editProjId,name,{});
       toast("✅ Project diperbarui!","#2dd4bf");
     }else{
-      await db.ref("projects/"+id).set({...data,createdAt:now()});
+      await db.ref("projects/"+id).set({...data,createdAt:now(),createdBy:UP.uid,createdByName:UP.name||UP.email});
+      await writeLog("create","project",id,name,{});
       toast("✅ Project baru ditambahkan!","#2dd4bf");
     }
     cm("project");
@@ -1471,6 +1890,7 @@ async function deleteProject(id){
     const delUpdates={};TASKS.filter(t=>t.projectId===id).forEach(t=>{delUpdates["tasks/"+t.id]=null;});
     delUpdates["projects/"+id]=null;
     await db.ref().update(delUpdates);
+    await writeLog("delete","project",id,id,{taskCount:cnt});
     if(curProjId===id)navTo("dashboard");
     toast("🗑️ Project dihapus.","#64748b");
   }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
