@@ -443,16 +443,52 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
   <div class="mbox">
     <div class="mhdr"><div class="mtitle" style="color:var(--green)">✅ Close Task Sewa</div><button class="mclose" onclick="cm('close')">✕</button></div>
     <div class="tsum" id="csum" style="background:rgba(45,212,191,.07);border:1px solid rgba(45,212,191,.2)"></div>
-    <!-- Ketentuan Close Sewa -->
-    <div style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.22);border-radius:var(--r-md);padding:10px 13px;margin-bottom:14px">
+
+    <!-- Ketentuan -->
+    <div style="background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.22);border-radius:var(--r-md);padding:10px 13px;margin-bottom:16px">
       <div style="font-size:10px;font-weight:700;color:var(--yellow);letter-spacing:.5px;margin-bottom:6px">📋 KETENTUAN CLOSE TASK SEWA</div>
-      <div style="font-size:11px;color:var(--tx2);line-height:1.75">
-        <div>① Isi <strong style="color:var(--yellow)">Nomor SR</strong> (Service Request) terlebih dahulu</div>
-        <div>② Task dapat di-Close setelah <strong style="color:var(--green)">PO (Purchase Order)</strong> sudah diterbitkan</div>
+      <div style="font-size:12px;color:var(--tx2);line-height:1.9">
+        <div>① Nomor <strong style="color:var(--yellow)">SR</strong> dan <strong style="color:var(--blue)">PR</strong> bersifat opsional — isi jika tersedia</div>
+        <div>② Task hanya bisa di-Close jika <strong style="color:var(--green)">Nomor PO ★</strong> sudah diisi</div>
+        <div>③ <strong style="color:var(--purple)">BAST</strong> diisi setelah serah terima selesai (opsional)</div>
       </div>
     </div>
-    <div class="fg"><label class="fl hl">Nomor SR (Service Request) ★</label><input class="fi" id="f-sr" placeholder="Contoh: SR-2025-0042"/></div>
-    <div class="fg"><label class="fl" style="color:var(--green)">Nomor PO (Purchase Order) ★</label><input class="fi" id="f-po" placeholder="Contoh: PO-2025-0099"/></div>
+
+    <!-- Nomor Dokumen: 2 kolom SR & PR -->
+    <div class="fr2" style="margin-bottom:13px">
+      <div class="fg" style="margin-bottom:0">
+        <label class="fl" style="color:var(--yellow)">📄 No. SR (Service Request)</label>
+        <input class="fi" id="f-sr" placeholder="SR-2025-0042"/>
+      </div>
+      <div class="fg" style="margin-bottom:0">
+        <label class="fl" style="color:var(--blue)">📋 No. PR (Purchase Request)</label>
+        <input class="fi" id="f-pr" placeholder="PR-2025-0088"/>
+      </div>
+    </div>
+
+    <!-- Nomor Dokumen: 2 kolom PO & BAST -->
+    <div class="fr2" style="margin-bottom:16px">
+      <div class="fg" style="margin-bottom:0">
+        <label class="fl" style="color:var(--green)">✅ No. PO (Purchase Order) ★</label>
+        <input class="fi" id="f-po" placeholder="PO-2025-0099" style="border-color:rgba(45,212,191,.4)"/>
+      </div>
+      <div class="fg" style="margin-bottom:0">
+        <label class="fl" style="color:var(--purple)">📝 No. BAST</label>
+        <input class="fi" id="f-bast" placeholder="BAST-2025-0010"/>
+      </div>
+    </div>
+
+    <!-- Update Status / Catatan Progres -->
+    <div class="fsec" style="margin-bottom:13px">
+      <div class="fsec-title" style="color:var(--blue)">📊 Update Status / Catatan Progres</div>
+      <div id="progress-log-list" style="max-height:130px;overflow-y:auto;margin-bottom:8px;display:flex;flex-direction:column;gap:5px"></div>
+      <div style="display:flex;gap:7px;align-items:flex-start">
+        <textarea class="fi" id="f-progress" rows="2" placeholder="Tulis update status / catatan progres terkini..." style="flex:1;resize:none"></textarea>
+        <button type="button" onclick="addProgressNote()" style="background:rgba(56,189,248,.15);color:var(--blue);border:1px solid rgba(56,189,248,.35);border-radius:var(--r-md);padding:8px 12px;font-size:12px;font-weight:600;white-space:nowrap;flex-shrink:0">➕ Tambah</button>
+      </div>
+    </div>
+
+    <!-- Opsi Setelah Close -->
     <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:13px">
       <label class="cbrow" onclick="toggleNP()"><input type="checkbox" id="chknp" checked/><label for="chknp" style="font-size:13px;color:var(--tx1);cursor:pointer">🔄 Input Masa Sewa Baru setelah Close</label></label>
       <label class="cbrow" style="background:rgba(248,113,113,.06);border-color:rgba(248,113,113,.2)"><input type="checkbox" id="chkberakhir" onchange="toggleKontrakBerakhir()"/><label for="chkberakhir" style="font-size:13px;color:var(--red);cursor:pointer">🚫 Kontrak Berakhir (tidak diperpanjang)</label></label>
@@ -464,7 +500,8 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
       <div class="fg" style="margin-bottom:0"><label class="fl">Mulai Sewa Baru ★</label><input class="fi" type="date" id="f-ns"/></div>
       <div class="fg" style="margin-bottom:0"><label class="fl">Akhir Sewa Baru ★</label><input class="fi" type="date" id="f-ne"/></div>
     </div></div>
-    <div class="fg"><label class="fl">Catatan Close</label><textarea class="fi" id="f-cn" rows="2" placeholder="Keterangan..."></textarea></div>
+
+    <div class="fg"><label class="fl">Catatan Close</label><textarea class="fi" id="f-cn" rows="2" placeholder="Keterangan tambahan..."></textarea></div>
     <div class="mactions"><button class="bcx" onclick="cm('close')">Batal</button><button class="bcg" onclick="confirmClose()">✅ Konfirmasi Close</button></div>
   </div>
 </div>
@@ -649,6 +686,26 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
     </div>
     <div class="fg"><label class="fl">Catatan</label><textarea class="fi" id="lainnya-f-notes" rows="2" placeholder="Keterangan tambahan..."></textarea></div>
     <div class="mactions"><button class="bcx" onclick="cm('lainnya')">Batal</button><button class="bcg" onclick="saveLainnya()" style="background:linear-gradient(135deg,var(--yellow),var(--yellow-d));color:var(--bg)">💾 Simpan</button></div>
+  </div>
+</div>
+
+<!-- MODAL UPDATE PROGRES -->
+<div class="modal-overlay" id="modal-progress">
+  <div class="mbox sm">
+    <div class="mhdr"><div class="mtitle" style="color:var(--blue)">📊 Update Progres Task</div><button class="mclose" onclick="cm('progress')">✕</button></div>
+    <div class="tsum" id="prog-sum" style="background:rgba(56,189,248,.07);border:1px solid rgba(56,189,248,.2);margin-bottom:14px"></div>
+    <!-- Riwayat catatan -->
+    <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--tx3);font-family:var(--mono);margin-bottom:8px;text-transform:uppercase">Riwayat Catatan</div>
+    <div id="prog-log-list" style="max-height:160px;overflow-y:auto;margin-bottom:13px;display:flex;flex-direction:column;gap:5px"></div>
+    <!-- Input baru -->
+    <div class="fg">
+      <label class="fl" style="color:var(--blue)">Tambah Catatan Baru</label>
+      <textarea class="fi" id="prog-text" rows="3" placeholder="Tulis update status / catatan progres terkini...&#10;Contoh: Sudah kirim PR ke vendor, menunggu approval PO..."></textarea>
+    </div>
+    <div class="mactions">
+      <button class="bcx" onclick="cm('progress')">Tutup</button>
+      <button class="bcb" onclick="saveProgressNote()">💾 Simpan Catatan</button>
+    </div>
   </div>
 </div>
 
@@ -1105,14 +1162,29 @@ function buildCard(task,showProj){
   const remCount=task.reminders?Object.keys(task.reminders).length:0;
   const lastRem=task.reminders?Object.values(task.reminders).sort((a,b)=>new Date(b.sentAt)-new Date(a.sentAt))[0]:null;
   let remlog=remCount?`<div style="margin-top:5px;font-size:10px;color:var(--purple)">🔔 ${remCount}x reminder · terakhir via ${lastRem.method} (${fd(lastRem.sentAt)})</div>`:"";
-  let extra=task.srNumber?`<div style="margin-top:3px;font-size:12px;color:var(--green);font-weight:600">✅ SR: ${esc(task.srNumber)}${task.poNumber?` &nbsp;·&nbsp; <span style="color:#34d399">PO: ${esc(task.poNumber)}</span>`:""}${task.kontrakBerakhir?` &nbsp;<span style="color:#f87171">🚫 Kontrak Berakhir</span>`:""}</div>`:"";
-  if(task.closedByName)extra+=`<div style="font-size:11px;color:var(--tx3);margin-top:2px">✍️ Closed by: <strong style="color:var(--tx2)">${esc(task.closedByName)}</strong></div>`;
-  if(!task.srNumber&&task.createdByName)extra+=`<div style="font-size:11px;color:var(--tx3);margin-top:2px">✍️ Dibuat oleh: <strong style="color:var(--tx2)">${esc(task.createdByName)}</strong></div>`;
-  if(task.notes)extra+=`<div style="font-size:12px;color:var(--tx3);font-style:italic;margin-top:3px">💬 ${esc(task.notes)}</div>`;
+  let extra=task.srNumber||task.prNumber||task.poNumber||task.bastNumber?`<div style="margin-top:5px;display:flex;flex-wrap:wrap;gap:5px">
+    ${task.srNumber?`<span style="font-size:11px;background:rgba(251,191,36,.1);color:var(--yellow);border:1px solid rgba(251,191,36,.25);border-radius:4px;padding:2px 8px">SR: ${esc(task.srNumber)}</span>`:""}
+    ${task.prNumber?`<span style="font-size:11px;background:rgba(56,189,248,.1);color:var(--blue);border:1px solid rgba(56,189,248,.25);border-radius:4px;padding:2px 8px">PR: ${esc(task.prNumber)}</span>`:""}
+    ${task.poNumber?`<span style="font-size:11px;background:rgba(45,212,191,.1);color:var(--green);border:1px solid rgba(45,212,191,.25);border-radius:4px;padding:2px 8px;font-weight:700">✅ PO: ${esc(task.poNumber)}</span>`:""}
+    ${task.bastNumber?`<span style="font-size:11px;background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.25);border-radius:4px;padding:2px 8px">BAST: ${esc(task.bastNumber)}</span>`:""}
+    ${task.kontrakBerakhir?`<span style="font-size:11px;background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.25);border-radius:4px;padding:2px 8px">🚫 Kontrak Berakhir</span>`:""}
+  </div>`:"";
+  // Progress notes — tampilkan yg terbaru
+  if(task.progressNotes&&task.progressNotes.length){
+    const latest=task.progressNotes[task.progressNotes.length-1];
+    extra+=`<div style="margin-top:6px;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.15);border-radius:var(--r-md);padding:6px 10px">
+      <div style="font-size:10px;color:var(--blue);font-weight:600;margin-bottom:2px">📊 Update Progres (${task.progressNotes.length} catatan)</div>
+      <div style="font-size:12px;color:var(--tx1)">${esc(latest.text)}</div>
+      <div style="font-size:10px;color:var(--tx3);margin-top:2px">👤 ${esc(latest.by)} · ${new Date(latest.at).toLocaleString("id-ID",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"})}</div>
+    </div>`;
+  }
+  if(task.closedByName)extra+=`<div style="font-size:11px;color:var(--tx3);margin-top:3px">✍️ Closed by: <strong style="color:var(--tx2)">${esc(task.closedByName)}</strong></div>`;
+  if(!task.poNumber&&task.createdByName)extra+=`<div style="font-size:11px;color:var(--tx3);margin-top:3px">✍️ Dibuat: <strong style="color:var(--tx2)">${esc(task.createdByName)}</strong></div>`;  if(task.notes)extra+=`<div style="font-size:12px;color:var(--tx3);font-style:italic;margin-top:3px">💬 ${esc(task.notes)}</div>`;
   if(task.webhookUrl)extra+=`<div style="font-size:11px;color:var(--purple);margin-top:2px">🔗 Webhook: aktif</div>`;
   let acts="";
   if(st!=="closed"){
     if((st==="expiring"||st==="expired")&&canClose(task))acts+=`<button class="ab yellow" onclick="openRemind('${task.id}')">🔔 Catat Reminder</button>`;
+    if(canClose(task))acts+=`<button class="ab blue" onclick="openUpdateProgress('${task.id}')">📊 Update Progres</button>`;
     if(canClose(task))acts+=`<button class="ab green" onclick="openClose('${task.id}')">✅ Close Task</button>`;
     if(isAdmin())acts+=`<button class="ab blue" onclick="openTaskModal('${task.id}')">✏️ Edit</button>`;
     if(isAdmin())acts+=`<button class="ab red" onclick="delTask('${task.id}')">🗑️ Hapus</button>`;
@@ -1229,11 +1301,46 @@ async function saveTask(){
 function openClose(id){
   acTask=TASKS.find(t=>t.id===id);if(!acTask)return;
   $("csum").innerHTML=`<strong style="color:var(--tx1);font-size:14px">${esc(acTask.itemName)}</strong><br><span style="font-size:12px;color:var(--tx2)">🏢 ${esc(acTask.vendor)} · 📅 Berakhir: ${fd(acTask.endDate)}</span>`;
-  $("f-sr").value="";$("f-po").value="";$("f-cn").value="";$("f-ns").value="";$("f-ne").value="";
+  // Reset semua field
+  ["f-sr","f-pr","f-po","f-bast","f-cn","f-progress","f-ns","f-ne"].forEach(i=>{const el=$(i);if(el)el.value="";});
+  // Pre-fill existing values if any (edit mode)
+  if(acTask.srNumber)$("f-sr").value=acTask.srNumber;
+  if(acTask.prNumber)$("f-pr").value=acTask.prNumber;
+  if(acTask.poNumber)$("f-po").value=acTask.poNumber;
+  if(acTask.bastNumber)$("f-bast").value=acTask.bastNumber;
+  // Render existing progress notes
+  renderProgressLog(acTask.progressNotes||[]);
   $("chknp").checked=true;$("npf").style.display="block";
   $("chkberakhir").checked=false;$("berakhir-info").classList.add("hidden");
   $("modal-close").classList.add("open");
 }
+
+// Temp progress notes buffer (session only, saved on confirmClose)
+let _progressNotes=[];
+function renderProgressLog(notes){
+  _progressNotes=[...(notes||[])];
+  const el=$("progress-log-list");
+  if(!el)return;
+  if(!_progressNotes.length){el.innerHTML=`<div style="font-size:11px;color:var(--tx3);text-align:center;padding:6px">Belum ada catatan progres</div>`;return;}
+  el.innerHTML=_progressNotes.map((n,i)=>`
+    <div style="background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r-md);padding:8px 11px;position:relative">
+      <div style="font-size:12px;color:var(--tx1)">${esc(n.text)}</div>
+      <div style="font-size:10px;color:var(--tx3);margin-top:3px">👤 ${esc(n.by)} · ${new Date(n.at).toLocaleString("id-ID",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"})}</div>
+      <button onclick="removeProgressNote(${i})" style="position:absolute;top:6px;right:7px;background:none;border:none;color:var(--tx3);font-size:12px;cursor:pointer;padding:2px 5px" title="Hapus">✕</button>
+    </div>`).join("");
+}
+function addProgressNote(){
+  const txt=$("f-progress").value.trim();
+  if(!txt){toast("❌ Tulis catatan terlebih dahulu","#f87171");return;}
+  _progressNotes.push({text:txt,by:UP.name||UP.email,at:now()});
+  $("f-progress").value="";
+  renderProgressLog(_progressNotes);
+}
+function removeProgressNote(idx){
+  _progressNotes.splice(idx,1);
+  renderProgressLog(_progressNotes);
+}
+
 function toggleNP(){
   const np=$("chknp");$("npf").style.display=np.checked?"block":"none";
   if(np.checked)$("chkberakhir").checked=false,$("berakhir-info").classList.add("hidden");
@@ -1242,24 +1349,30 @@ function toggleKontrakBerakhir(){
   const kb=$("chkberakhir");$("berakhir-info").classList.toggle("hidden",!kb.checked);
   if(kb.checked){$("chknp").checked=false;$("npf").style.display="none";}
 }
+
 async function confirmClose(){
-  const sr=$("f-sr").value.trim();if(!sr){toast("❌ Nomor SR wajib diisi!","#f87171");return;}
-  const po=$("f-po").value.trim();if(!po){toast("❌ Nomor PO wajib diisi!","#f87171");return;}
+  const po=$("f-po").value.trim();
+  if(!po){toast("❌ Nomor PO wajib diisi sebelum Close!","#f87171");return;}
+  const sr=$("f-sr").value.trim();
+  const pr=$("f-pr").value.trim();
+  const bast=$("f-bast").value.trim();
   const addNew=$("chknp").checked;const kontrakBerakhir=$("chkberakhir").checked;
   const ns=$("f-ns").value;const ne=$("f-ne").value;
   if(addNew&&(!ns||!ne)){toast("❌ Isi periode sewa baru!","#f87171");return;}
   const closeData={
-    status:"closed",srNumber:sr,poNumber:po,closeNotes:$("f-cn").value.trim(),
+    status:"closed",
+    srNumber:sr,prNumber:pr,poNumber:po,bastNumber:bast,
+    closeNotes:$("f-cn").value.trim(),
+    progressNotes:_progressNotes,
     closedAt:now(),closedBy:UP.uid,closedByName:UP.name||UP.email,
-    needsReminder:false,kontrakBerakhir:kontrakBerakhir,
+    needsReminder:false,kontrakBerakhir,
   };
   try{
     await db.ref("tasks/"+acTask.id).update(closeData);
     await writeLog("close","task_sewa",acTask.id,acTask.itemName,{
-      srNumber:sr,poNumber:po,kontrakBerakhir,projectId:acTask.projectId
+      srNumber:sr,prNumber:pr,poNumber:po,bastNumber:bast,kontrakBerakhir,projectId:acTask.projectId
     });
-    // Fire webhook if configured
-    if(acTask.webhookUrl)fireWebhook(acTask.webhookUrl,{type:"task_closed",task:acTask,sr,po,closedBy:UP.name||UP.email});
+    if(acTask.webhookUrl)fireWebhook(acTask.webhookUrl,{type:"task_closed",task:acTask,sr,pr,po,bast,closedBy:UP.name||UP.email});
     let msg="✅ Task di-close!";
     if(addNew){
       const newKey=db.ref("tasks").push().key;
@@ -1845,6 +1958,41 @@ function updateSewaBadge(){
   const alert=tasks.filter(t=>t.status!=="closed"&&du(t.endDate)<=REMINDER_DAYS).length;
   const nb=$("nrc-sewa");
   if(nb){if(alert>0){nb.textContent=alert;nb.classList.remove("hidden");}else nb.classList.add("hidden");}
+}
+
+// ─── UPDATE PROGRES (standalone modal) ────────────────────────────
+let _progTaskId=null;
+function openUpdateProgress(id){
+  _progTaskId=id;
+  const task=TASKS.find(t=>t.id===id);if(!task)return;
+  $("prog-sum").innerHTML=`<strong style="color:var(--tx1);font-size:14px">${esc(task.itemName)}</strong><br><span style="font-size:12px;color:var(--tx2)">🏢 ${esc(task.vendor)} · 📅 Berakhir: ${fd(task.endDate)}</span>`;
+  $("prog-text").value="";
+  // Render existing notes
+  const notes=task.progressNotes||[];
+  const el=$("prog-log-list");
+  if(!notes.length){el.innerHTML=`<div style="font-size:12px;color:var(--tx3);text-align:center;padding:10px">Belum ada catatan progres</div>`;}
+  else{el.innerHTML=notes.slice().reverse().map(n=>`
+    <div style="background:var(--bg3);border:1px solid var(--brd);border-radius:var(--r-md);padding:8px 11px">
+      <div style="font-size:13px;color:var(--tx1)">${esc(n.text)}</div>
+      <div style="font-size:10px;color:var(--tx3);margin-top:3px">👤 ${esc(n.by)} · ${new Date(n.at).toLocaleString("id-ID",{day:"2-digit",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit"})}</div>
+    </div>`).join("");}
+  $("modal-progress").classList.add("open");
+}
+async function saveProgressNote(){
+  const txt=$("prog-text").value.trim();
+  if(!txt){toast("❌ Tulis catatan terlebih dahulu","#f87171");return;}
+  const task=TASKS.find(t=>t.id===_progTaskId);if(!task)return;
+  const existing=task.progressNotes||[];
+  const newNote={text:txt,by:UP.name||UP.email,at:now()};
+  const updated=[...existing,newNote];
+  try{
+    await db.ref("tasks/"+_progTaskId).update({
+      progressNotes:updated,updatedAt:now(),updatedBy:UP.uid,updatedByName:UP.name||UP.email
+    });
+    await writeLog("update","task_sewa",_progTaskId,task.itemName,{note:txt,projectId:task.projectId,action:"progress_note"});
+    toast("✅ Catatan progres disimpan!","#38bdf8");
+    cm("progress");
+  }catch(e){toast("❌ Gagal: "+e.message,"#f87171");}
 }
 
 // ─── PROJECT MODAL ─────────────────────────────────────────────────
