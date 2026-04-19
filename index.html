@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ICT Project Manager</title>
+<title>Task Customer Operation Manager</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 
 <!-- Firebase SDK — Realtime Database -->
@@ -206,8 +206,8 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
 <div id="login-screen" class="active">
   <div class="lcard">
     <div class="llogo">⚡</div>
-    <div class="ltitle">ICT Project Manager</div>
-    <div class="lsub">Sistem Monitoring Layanan ICT</div>
+    <div class="ltitle">Task Customer Operation Manager</div>
+    <div class="lsub">Sistem Monitoring Customer Operation</div>
     <div class="lerr" id="lerr">Email atau password salah.</div>
     <div class="fg"><label class="fl">Email</label><input class="fi" type="email" id="iu" placeholder="nama@perusahaan.com" autocomplete="email"/></div>
     <div class="fg"><label class="fl">Password</label><input class="fi" type="password" id="ip" placeholder="••••••••" autocomplete="current-password"/></div>
@@ -225,8 +225,8 @@ code.cy{background:rgba(251,191,36,.1);color:var(--yellow)}
 <div id="app" class="hidden">
   <aside id="sidebar">
     <div class="sb-brand">
-      <div class="sb-brand-name">⚡ ICT PROJECT MANAGER</div>
-      <div class="sb-brand-sub">Sistem Monitoring Layanan ICT</div>
+      <div class="sb-brand-name">⚡ TASK CUSTOMER OPERATION MANAGER</div>
+      <div class="sb-brand-sub">Sistem Monitoring Customer Operation</div>
     </div>
     <div class="sb-user"><div class="sb-user-name" id="sbn">—</div><div class="sb-user-role" id="sbr">—</div></div>
     <div class="sb-nav">
@@ -1743,7 +1743,7 @@ async function delTask(id){
 function fireWebhook(url, payload){
   if(!url)return;
   fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({...payload,timestamp:now(),appName:"ICT Project Manager"})
+    body:JSON.stringify({...payload,timestamp:now(),appName:"Task Customer Operation Manager"})
   }).catch(e=>console.warn("Webhook gagal:",e.message));
 }
 
